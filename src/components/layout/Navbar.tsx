@@ -3,12 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, ChevronDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,15 +77,50 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center">
-            <a
-              href="#"
-              className={`${buttonVariants({ size: "sm" })} rounded-full px-5 gap-2 shadow-md shadow-primary/20`}
+          {/* Desktop CTA Button with Dropdown */}
+          <div className="hidden lg:flex items-center relative">
+            <button
+              onClick={() => setCvDropdownOpen(!cvDropdownOpen)}
+              onBlur={() => setTimeout(() => setCvDropdownOpen(false), 200)}
+              className={`${buttonVariants({ size: "sm" })} rounded-full px-5 gap-2 shadow-md shadow-primary/20 flex items-center font-bold`}
             >
               <Download className="w-4 h-4" />
               Download CV
-            </a>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${cvDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <AnimatePresence>
+              {cvDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-card border-2 border-foreground rounded-xl shadow-[4px_4px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_rgba(255,255,255,0.15)] py-2 z-50 text-left select-none"
+                >
+                  <a
+                    href="/CV/Cenedy Udoy Palma.pdf"
+                    download="Cenedy Udoy Palma.pdf"
+                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50"
+                  >
+                    💼 Software Engineer CV (General)
+                  </a>
+                  <a
+                    href="/CV/it_industry.pdf"
+                    download="Cenedy Udoy Palma - IT Industry CV.pdf"
+                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50"
+                  >
+                    🛠️ IT Industry CV
+                  </a>
+                  <a
+                    href="/CV/Candy_letex_cv_For_US_salimsazzed.pdf"
+                    download="Cenedy Udoy Palma - US Format CV.pdf"
+                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors"
+                  >
+                    🌐 US Format CV
+                  </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -110,14 +147,33 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-          <a
-            href="#"
-            className={`${buttonVariants()} w-full mt-3 rounded-full gap-2 shrink-0`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <Download className="w-4 h-4" />
-            Download CV
-          </a>
+          <div className="border-t border-border/30 mt-3 pt-3 flex flex-col gap-2">
+            <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-3 mb-1">Download CV Options:</p>
+            <a
+              href="/CV/Cenedy Udoy Palma.pdf"
+              download="Cenedy Udoy Palma.pdf"
+              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              💼 Software Engineer CV (General)
+            </a>
+            <a
+              href="/CV/it_industry.pdf"
+              download="Cenedy Udoy Palma - IT Industry CV.pdf"
+              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              🛠️ IT Industry CV
+            </a>
+            <a
+              href="/CV/Candy_letex_cv_For_US_salimsazzed.pdf"
+              download="Cenedy Udoy Palma - US Format CV.pdf"
+              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              🌐 US Format CV
+            </a>
+          </div>
         </nav>
       )}
     </header>
