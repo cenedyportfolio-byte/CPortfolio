@@ -11,9 +11,9 @@ import Image from "next/image";
 
 export function FeaturedProjectsSection() {
   const [mounted, setMounted] = useState(false);
-  const [hoveredProject, setHoveredProject] = useState<'pokemon' | null>(null);
-  const [isOverCard, setIsOverCard] = useState(false);
-  const [isOverMockup, setIsOverMockup] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<'pokemon' | 'lce' | null>(null);
+  const [isOverCard, setIsOverCard] = useState<'pokemon' | 'lce' | null>(null);
+  const [isOverMockup, setIsOverMockup] = useState<'pokemon' | 'lce' | null>(null);
   const [windowBlurred, setWindowBlurred] = useState(false);
 
   useEffect(() => {
@@ -22,8 +22,10 @@ export function FeaturedProjectsSection() {
 
   // Debounced/delayed state updater to bridge gap between leaving card and entering mockup without flickering
   useEffect(() => {
-    if (isOverCard || isOverMockup) {
-      setHoveredProject('pokemon');
+    if (isOverCard) {
+      setHoveredProject(isOverCard);
+    } else if (isOverMockup) {
+      setHoveredProject(isOverMockup);
     } else {
       const timer = setTimeout(() => {
         setHoveredProject(null);
@@ -111,7 +113,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-secondary via-secondary/80 to-accent",
       tags: ["Laravel", "React", "MySQL"],
       github: "https://github.com",
-      demo: "https://example.com",
+      demo: "https://laundry-care-express.vercel.app/",
     },
     {
       title: "Real-Time Chat App",
@@ -153,7 +155,7 @@ export function FeaturedProjectsSection() {
         <div 
           className="flex w-max gap-6 animate-infinite-slide-slow"
           style={{
-            animationPlayState: hoveredProject === 'pokemon' ? 'paused' : 'running'
+            animationPlayState: hoveredProject ? 'paused' : 'running'
           }}
         >
           {[...projects, ...projects, ...projects].map((project, index) => (
@@ -162,17 +164,21 @@ export function FeaturedProjectsSection() {
               className="w-[280px] sm:w-[320px] shrink-0 group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px] cursor-help"
               onMouseEnter={() => {
                 if (project.title === "Pokemon Trading Platform") {
-                  setIsOverCard(true);
+                  setIsOverCard('pokemon');
+                } else if (project.title === "LCE Backend System") {
+                  setIsOverCard('lce');
                 }
               }}
               onMouseLeave={() => {
-                if (project.title === "Pokemon Trading Platform") {
-                  setIsOverCard(false);
+                if (project.title === "Pokemon Trading Platform" || project.title === "LCE Backend System") {
+                  setIsOverCard(null);
                 }
               }}
               onClick={() => {
                 if (project.title === "Pokemon Trading Platform") {
-                  setIsOverCard(prev => !prev);
+                  setIsOverCard(prev => prev === 'pokemon' ? null : 'pokemon');
+                } else if (project.title === "LCE Backend System") {
+                  setIsOverCard(prev => prev === 'lce' ? null : 'lce');
                 }
               }}
             >
@@ -197,6 +203,11 @@ export function FeaturedProjectsSection() {
                     {project.title === "Pokemon Trading Platform" && (
                       <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-accent/10 text-accent rounded-full border border-accent/20">
                         <Eye className="w-2.5 h-2.5" /> Mockup 💻📱
+                      </span>
+                    )}
+                    {project.title === "LCE Backend System" && (
+                      <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-accent/10 text-accent rounded-full border border-accent/20">
+                        <Eye className="w-2.5 h-2.5" /> Mockup 💻
                       </span>
                     )}
                   </h3>
@@ -231,8 +242,8 @@ export function FeaturedProjectsSection() {
               onDragStart={(e) => e.preventDefault()}
               className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm pointer-events-auto md:bg-transparent md:backdrop-blur-none md:pointer-events-none print:hidden select-none"
               onClick={() => {
-                setIsOverCard(false);
-                setIsOverMockup(false);
+                setIsOverCard(null);
+                setIsOverMockup(null);
                 setHoveredProject(null);
               }}
             >
@@ -249,8 +260,8 @@ export function FeaturedProjectsSection() {
                   className={`relative w-[78%] aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 hidden md:flex pointer-events-auto cursor-pointer hover:scale-[1.01] hover:shadow-[24px_24px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 transition-transform duration-200 ${
                     windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
                   }`}
-                  onMouseEnter={() => setIsOverMockup(true)}
-                  onMouseLeave={() => setIsOverMockup(false)}
+                  onMouseEnter={() => setIsOverMockup('pokemon')}
+                  onMouseLeave={() => setIsOverMockup(null)}
                 >
                   {/* Browser Top bar */}
                   <div className="h-10 border-b-2 border-foreground bg-muted/30 px-4 flex items-center justify-between shrink-0 select-none">
@@ -287,8 +298,8 @@ export function FeaturedProjectsSection() {
                   className={`bg-white dark:bg-card border-4 border-foreground rounded-[28px] shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.15)] z-20 flex flex-col overflow-hidden transition-all duration-300 pointer-events-auto cursor-pointer hover:scale-[1.03] hover:-translate-y-1.5 active:translate-y-0 transition-transform duration-200 ${
                     windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
                   } md:absolute md:right-0 md:bottom-6 md:w-[25%] md:aspect-[9/19] w-[70vw] max-w-[280px] aspect-[9/19]`}
-                  onMouseEnter={() => setIsOverMockup(true)}
-                  onMouseLeave={() => setIsOverMockup(false)}
+                  onMouseEnter={() => setIsOverMockup('pokemon')}
+                  onMouseLeave={() => setIsOverMockup(null)}
                 >
                   {/* Mobile Screen Notch */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-3 bg-foreground rounded-full z-30 flex items-center justify-center">
@@ -307,6 +318,126 @@ export function FeaturedProjectsSection() {
                       priority
                       onDragStart={(e) => e.preventDefault()}
                     />
+                  </div>
+                </a>
+
+                {/* Security Watermarks */}
+                {!windowBlurred && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.06] dark:opacity-[0.1] select-none flex flex-col justify-around py-4 z-30 print:hidden">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="flex justify-around text-[9px] font-black tracking-widest text-foreground uppercase whitespace-nowrap rotate-[-20deg] scale-110"
+                        style={{ marginLeft: i % 2 === 0 ? '-30px' : '30px' }}
+                      >
+                        {Array.from({ length: 4 }).map((_, j) => (
+                          <span key={j} className="mx-4 select-none">
+                            Cenedy Palma • SECURE PREVIEW • DO NOT COPY
+                          </span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Blur Intercept Security Message */}
+                {windowBlurred && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-md p-4 text-center z-40 pointer-events-auto rounded-3xl">
+                    <div className="bg-red-600 text-white font-black text-xs sm:text-sm uppercase px-4 py-2 border-2 border-white shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-sm flex items-center gap-2 mb-3 animate-pulse">
+                      ⚠️ SECURITY LOCK ⚠️
+                    </div>
+                    <p className="text-white font-extrabold text-xs sm:text-sm max-w-[280px]">
+                      Project Mockup Protected. Focus lost or screenshot attempt blocked.
+                    </p>
+                  </div>
+                )}
+
+              </div>
+            </motion.div>
+          )}
+
+          {hoveredProject === 'lce' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 15 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm pointer-events-auto md:bg-transparent md:backdrop-blur-none md:pointer-events-none print:hidden select-none"
+              onClick={() => {
+                setIsOverCard(null);
+                setIsOverMockup(null);
+                setHoveredProject(null);
+              }}
+            >
+              <style>{`
+                @keyframes lceMarquee {
+                  0% { transform: translateY(0); }
+                  100% { transform: translateY(-50%); }
+                }
+                .animate-lce-marquee {
+                  animation: lceMarquee 30s linear infinite;
+                }
+              `}</style>
+              <div 
+                className="relative w-full h-full flex items-center justify-center max-w-[850px] p-4"
+                onClick={(e) => e.stopPropagation()}
+              >
+                
+                {/* Desktop Mockup Browser Frame */}
+                <a 
+                  href="https://laundry-care-express.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`relative w-[95vw] md:w-full aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 pointer-events-auto cursor-pointer hover:scale-[1.01] hover:shadow-[24px_24px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 transition-transform duration-200 ${
+                    windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
+                  }`}
+                  onMouseEnter={() => setIsOverMockup('lce')}
+                  onMouseLeave={() => setIsOverMockup(null)}
+                >
+                  {/* Browser Top bar */}
+                  <div className="h-10 border-b-2 border-foreground bg-muted/30 px-4 flex items-center justify-between shrink-0 select-none">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500 border border-foreground" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500 border border-foreground" />
+                      <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
+                    </div>
+                    <div className="w-1/2 h-6 rounded-md border border-foreground bg-background px-3 flex items-center text-[10px] text-muted-foreground tracking-wide font-mono">
+                      laundry-care-express.vercel.app
+                    </div>
+                    <div className="w-6" /> {/* spacer */}
+                  </div>
+                  
+                  {/* Browser Content with Continuous Auto-Scroll */}
+                  <div className="flex-1 w-full relative overflow-hidden bg-muted/10">
+                    <div className="absolute top-0 left-0 w-full flex flex-col gap-3 p-3 select-none pointer-events-none animate-lce-marquee">
+                      {[
+                        "Screenshot 2026-06-01 193600.png",
+                        "Screenshot 2026-06-01 193607.png",
+                        "Screenshot 2026-06-01 193614.png",
+                        "Screenshot 2026-06-01 193623.png",
+                        "Screenshot 2026-06-01 193629.png",
+                        "Screenshot 2026-06-01 193640.png"
+                      ].concat([
+                        "Screenshot 2026-06-01 193600.png",
+                        "Screenshot 2026-06-01 193607.png",
+                        "Screenshot 2026-06-01 193614.png",
+                        "Screenshot 2026-06-01 193623.png",
+                        "Screenshot 2026-06-01 193629.png",
+                        "Screenshot 2026-06-01 193640.png"
+                      ]).map((img, i) => (
+                        <div key={i} className="relative w-full aspect-[16/10] border-2 border-foreground rounded-xl overflow-hidden shadow-md bg-white">
+                          <Image 
+                            src={`/images/Projects/LCE/${img}`}
+                            alt={`LCE Screenshot ${i}`}
+                            fill
+                            sizes="(max-width: 768px) 95vw, 800px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </a>
 
