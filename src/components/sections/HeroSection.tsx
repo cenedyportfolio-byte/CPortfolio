@@ -35,19 +35,21 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] lg:w-[32vw] max-w-[480px] aspect-[4/5] z-10 shadow-2xl group cursor-pointer overflow-hidden"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] lg:w-[32vw] max-w-[480px] aspect-[4/5] z-10 shadow-2xl group cursor-pointer"
           >
-            <Image
-              src="/images/hero.png"
-              alt="Cenedy Udoy Palma"
-              fill
-              sizes="(max-width: 768px) 60vw, 26vw"
-              className="object-cover object-top transition-all duration-700"
-              priority
-            />
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+              <Image
+                src="/images/hero.png"
+                alt="Cenedy Udoy Palma"
+                fill
+                sizes="(max-width: 768px) 60vw, 26vw"
+                className="object-cover object-top transition-all duration-700"
+                priority
+              />
 
-            {/* Blue Glass Overlay */}
-            <div className="absolute inset-0 bg-blue-500/25 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none border border-white/20" />
+              {/* Blue Glass Overlay */}
+              <div className="absolute inset-0 bg-blue-500/25 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none border border-white/20" />
+            </div>
 
             {/* Brutalist Floating Elements */}
             <motion.div
