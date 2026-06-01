@@ -90,7 +90,7 @@ export function HeroSection() {
           >
             <div className="border-l-4 border-primary pl-6">
               <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-3">
-                Software Engineer <span className="text-primary">X</span> Product Builder
+                Software Engineer <span className="text-primary"> & </span> Product Builder
               </h2>
               <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed max-w-md">
                 I build scalable backend systems and seamlessly integrate AI into high-performance SaaS applications. No templates. No safe harbors. Pure engineering.
@@ -145,9 +145,9 @@ export function HeroSection() {
         <div className="container mx-auto px-4 max-w-[1400px]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x divide-foreground/10">
             {[
-              { value: "04+", label: "Years Experience", icon: <Briefcase className="w-4 h-4" /> },
+              { value: "05+", label: "Years Experience", icon: <Briefcase className="w-4 h-4" /> },
               { value: "10+", label: "Projects Delivered", icon: <FolderGit className="w-4 h-4" /> },
-              { value: "05+", label: "Core Technologies", icon: <Cpu className="w-4 h-4" /> },
+              { value: "06+", label: "Core Technologies", icon: <Cpu className="w-4 h-4" /> },
               { value: "∞", label: "Problems Solved", icon: <Trophy className="w-4 h-4" /> },
             ].map((stat, index) => (
               <div key={stat.label} className={`flex items-center gap-4 ${index !== 0 ? 'pl-4 md:pl-8' : ''}`}>
