@@ -107,13 +107,13 @@ export function ExperienceSection() {
       degree: "Master of Information Technology (MIT)",
       institution: "Institute of Information Technology, University of Dhaka",
       period: "2023 – 2025",
-      logo: "/images/dhaka_university_logo.png",
+      logo: "/images/du_logo_official.png",
     },
     {
       degree: "BSc in Computer Science & Engineering",
       institution: "Notre Dame University Bangladesh",
       period: "2018 – 2022",
-      logo: "/images/ndub_logo.png",
+      logo: "/images/ndub_logo_official.png",
     },
   ];
 
