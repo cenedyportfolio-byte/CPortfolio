@@ -105,13 +105,13 @@ export function AboutSection() {
           
           <motion.div variants={motionItem} className="relative z-10 w-full max-w-sm mx-auto lg:mx-0">
             {/* Brutalist Photo Frame */}
-            <div className="relative w-full aspect-[4/5] overflow-hidden border border-foreground shadow-[8px_8px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,0.05)] mb-8 transition-all duration-500">
+            <div className="relative w-full aspect-square overflow-hidden border border-foreground shadow-[8px_8px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,0.05)] mb-8 transition-all duration-500">
               <Image
                 src="/images/about.png"
                 alt="Cenedy Udoy Palma — About"
                 fill
                 sizes="(max-width: 768px) 100vw, 35vw"
-                className="object-cover object-top"
+                className="object-cover object-center"
                 priority
               />
               <div className="absolute top-4 left-4 bg-background text-foreground text-[10px] font-black uppercase tracking-widest px-3 py-1 border border-foreground">
