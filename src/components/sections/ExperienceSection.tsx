@@ -1,10 +1,31 @@
 "use client";
 
+import { useState } from "react";
 import { SectionWrapper, motionItem } from "@/components/layout/SectionWrapper";
-import { motion } from "framer-motion";
-import { GraduationCap, Award, Trophy, Star, Medal } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { GraduationCap, Award, Trophy, Star, Medal, Eye } from "lucide-react";
 
 export function ExperienceSection() {
+  const [hoveredCert, setHoveredCert] = useState<'blockchain' | 'internship' | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (typeof window === "undefined") return;
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
+
+    // Boundary safety: shift position left/up if tooltip hits viewport edge
+    const tooltipWidth = 360;
+    const tooltipHeight = 270;
+    const xOffset = e.clientX + tooltipWidth > window.innerWidth ? -(tooltipWidth + 20) : 20;
+    const yOffset = e.clientY + tooltipHeight > window.innerHeight ? -(tooltipHeight + 20) : 20;
+
+    setMousePos({
+      x: e.clientX + xOffset,
+      y: e.clientY + yOffset,
+    });
+  };
+
   const experiences = [
     {
       role: "Backend Developer & Product Researcher",
@@ -26,6 +47,7 @@ export function ExperienceSection() {
       period: "Jul – Sep 2024",
       description: "Worked on enterprise-level backend modules using PHP and Laravel.",
       color: "bg-secondary",
+      hasCert: true,
     },
     {
       role: "Junior Programmer Intern",
@@ -54,6 +76,7 @@ export function ExperienceSection() {
       title: "Finalist – Blockchain Olympiad Bangladesh (Professional Category)",
       year: "2022",
       icon: <Trophy className="w-5 h-5 text-warning" />,
+      hasCert: true,
     },
     {
       title: "Second Runner-Up – NDUB CSE FEST Programming Contest",
@@ -74,7 +97,7 @@ export function ExperienceSection() {
 
   return (
     <SectionWrapper id="experience" className="bg-background">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
         
         {/* Left — Experience Timeline */}
         <motion.div variants={motionItem} className="lg:col-span-7">
@@ -99,7 +122,23 @@ export function ExperienceSection() {
                 </span>
                 
                 <h3 className="text-lg font-bold text-foreground">{exp.role}</h3>
-                <p className="text-sm text-primary font-medium mb-2">{exp.company}</p>
+                
+                {exp.hasCert ? (
+                  <p 
+                    onMouseEnter={() => setHoveredCert('internship')}
+                    onMouseLeave={() => setHoveredCert(null)}
+                    onMouseMove={handleMouseMove}
+                    className="text-sm text-primary font-medium mb-2 hover:text-primary/80 transition-colors cursor-help inline-flex items-center gap-1.5"
+                  >
+                    {exp.company}
+                    <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-primary/10 rounded-full border border-primary/20">
+                      <Eye className="w-2.5 h-2.5" /> Hover to view Cert 📄
+                    </span>
+                  </p>
+                ) : (
+                  <p className="text-sm text-primary font-medium mb-2">{exp.company}</p>
+                )}
+
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {exp.description}
                 </p>
@@ -140,17 +179,63 @@ export function ExperienceSection() {
                     {achievement.icon}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {achievement.title}
-                    </p>
-                    <span className="text-xs text-muted-foreground">{achievement.year}</span>
+                    {achievement.hasCert ? (
+                      <p 
+                        onMouseEnter={() => setHoveredCert('blockchain')}
+                        onMouseLeave={() => setHoveredCert(null)}
+                        onMouseMove={handleMouseMove}
+                        className="text-sm font-semibold text-foreground hover:text-primary transition-colors cursor-help inline-flex items-center gap-2 flex-wrap"
+                      >
+                        {achievement.title}
+                        <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-warning/10 text-warning rounded-full border border-warning/20">
+                          <Eye className="w-2.5 h-2.5" /> Hover to view Cert 📄
+                        </span>
+                      </p>
+                    ) : (
+                      <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {achievement.title}
+                      </p>
+                    )}
+                    <span className="text-xs text-muted-foreground block mt-0.5">{achievement.year}</span>
                   </div>
                 </div>
               ))}
             </div>
           </motion.div>
         </div>
+
       </div>
+
+      {/* Dynamic Floating Certificate Tooltip Preview */}
+      <AnimatePresence>
+        {hoveredCert && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed pointer-events-none z-[9999] rounded-xl overflow-hidden border border-white/20 shadow-2xl p-2.5 glass w-[280px] sm:w-[360px] aspect-[4/3] flex flex-col gap-2"
+            style={{
+              left: mousePos.x,
+              top: mousePos.y,
+            }}
+          >
+            <div className="relative w-full h-full rounded-lg overflow-hidden border border-border">
+              <Image 
+                src={hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' : '/images/cert-internship.jpg'}
+                alt="Certificate Preview"
+                fill
+                sizes="(max-width: 768px) 260px, 340px"
+                className="object-contain bg-[#0F172A]"
+                priority
+              />
+            </div>
+            <div className="text-[8px] font-black uppercase tracking-widest text-center text-muted-foreground">
+              Verify Credentials // Interactive Preview
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SectionWrapper>
   );
 }
