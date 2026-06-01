@@ -2,7 +2,7 @@
 
 import { SectionWrapper, motionItem } from "@/components/layout/SectionWrapper";
 import { motion } from "framer-motion";
-import { Layout, Server, Database, Cloud, Bot } from "lucide-react";
+import { Layout, Server, Database, Cloud, Bot, Smartphone } from "lucide-react";
 
 export function TechStackSection() {
   const categories = [
@@ -21,6 +21,14 @@ export function TechStackSection() {
       bg: "bg-success/10",
       dotColor: "bg-success",
       skills: ["Node.js", "Laravel", "PHP", "REST APIs", "WebSockets"],
+    },
+    {
+      title: "Mobile & Desktop",
+      icon: <Smartphone className="w-5 h-5" />,
+      color: "text-rose-500",
+      bg: "bg-rose-500/10",
+      dotColor: "bg-rose-500",
+      skills: ["Flutter", "Dart", "NativePHP", "Android Studio"],
     },
     {
       title: "Databases",
@@ -56,7 +64,7 @@ export function TechStackSection() {
         </h2>
       </motion.div>
 
-      <motion.div variants={motionItem} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+      <motion.div variants={motionItem} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
         {categories.map((category) => (
           <div key={category.title}>
             {/* Category Header */}
