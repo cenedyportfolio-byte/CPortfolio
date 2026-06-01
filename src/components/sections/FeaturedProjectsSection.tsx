@@ -271,7 +271,7 @@ export function FeaturedProjectsSection() {
                   {/* Mobile Content */}
                   <div className="flex-1 w-full relative bg-muted/10 rounded-[24px] overflow-hidden">
                     <Image 
-                      src="/images/Projects/Pokemon/Screenshot 2026-06-01 184540.png"
+                      src="/images/Projects/Pokemon/pokemon_mobile_ui.png"
                       alt="Pokemon Trading Platform Mobile"
                       fill
                       sizes="(max-width: 768px) 25vw, 220px"
