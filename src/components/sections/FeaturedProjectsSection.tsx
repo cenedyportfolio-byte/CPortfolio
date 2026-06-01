@@ -1,12 +1,76 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { SectionWrapper, motionItem } from "@/components/layout/SectionWrapper";
-import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Eye } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 export function FeaturedProjectsSection() {
+  const [mounted, setMounted] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<'pokemon' | null>(null);
+  const [windowBlurred, setWindowBlurred] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const handleBlur = () => {
+      if (hoveredProject) setWindowBlurred(true);
+    };
+    const handleFocus = () => setWindowBlurred(false);
+
+    window.addEventListener('blur', handleBlur);
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('blur', handleBlur);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [hoveredProject]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!hoveredProject) return;
+
+      // Disable Save Page (Ctrl+S / Cmd+S)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+      }
+
+      // Disable Print (Ctrl+P / Cmd+P)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+      }
+
+      // Disable Copy (Ctrl+C / Cmd+C)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+      }
+
+      // Disable Developer Tools: F12, Ctrl+Shift+I / Cmd+Opt+I
+      if (e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i')) {
+        e.preventDefault();
+      }
+
+      // Detect PrintScreen and blur immediately
+      if (e.key === 'PrintScreen') {
+        e.preventDefault();
+        setWindowBlurred(true);
+        setTimeout(() => setWindowBlurred(false), 3000);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [hoveredProject]);
+
   const projects = [
     {
       title: "SAVIOR",
@@ -76,7 +140,17 @@ export function FeaturedProjectsSection() {
           {[...projects, ...projects, ...projects].map((project, index) => (
             <div 
               key={index} 
-              className="w-[280px] sm:w-[320px] shrink-0 group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px]"
+              className="w-[280px] sm:w-[320px] shrink-0 group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px] cursor-help"
+              onMouseEnter={() => {
+                if (project.title === "Pokemon Trading Platform") {
+                  setHoveredProject('pokemon');
+                }
+              }}
+              onMouseLeave={() => {
+                if (project.title === "Pokemon Trading Platform") {
+                  setHoveredProject(null);
+                }
+              }}
             >
               {/* Image / Gradient Header */}
               <div className={`w-full h-36 relative overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
@@ -94,8 +168,13 @@ export function FeaturedProjectsSection() {
               {/* Content */}
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-base font-bold text-foreground mb-0.5 group-hover:text-primary transition-colors">
+                  <h3 className="text-base font-bold text-foreground mb-0.5 group-hover:text-primary transition-colors flex items-center gap-2 flex-wrap">
                     {project.title}
+                    {project.title === "Pokemon Trading Platform" && (
+                      <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-accent/10 text-accent rounded-full border border-accent/20">
+                        <Eye className="w-2.5 h-2.5" /> Mockup 💻📱
+                      </span>
+                    )}
                   </h3>
                   <p className="text-xs text-primary font-medium mb-2">{project.subtitle}</p>
                   <p className="text-xs text-muted-foreground leading-relaxed">
@@ -114,6 +193,119 @@ export function FeaturedProjectsSection() {
           ))}
         </div>
       </motion.div>
+
+      {/* Dynamic Neobrutalist Mockup Overlay Preview via Portal */}
+      {mounted && typeof document !== "undefined" && createPortal(
+        <AnimatePresence>
+          {hoveredProject === 'pokemon' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 15 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none select-none print:hidden w-[95vw] max-w-[1000px] h-[60vh] max-h-[600px] flex items-center justify-center"
+            >
+              <div className="relative w-full h-full flex items-center justify-start max-w-[850px] p-4">
+                
+                {/* Desktop Mockup Browser Frame */}
+                <div 
+                  className={`relative w-[78%] aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 ${
+                    windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
+                  }`}
+                >
+                  {/* Browser Top bar */}
+                  <div className="h-10 border-b-2 border-foreground bg-muted/30 px-4 flex items-center justify-between shrink-0 select-none">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500 border border-foreground" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500 border border-foreground" />
+                      <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
+                    </div>
+                    <div className="w-1/2 h-6 rounded-md border border-foreground bg-background px-3 flex items-center text-[10px] text-muted-foreground tracking-wide font-mono">
+                      pokepixels.vercel.app
+                    </div>
+                    <div className="w-6" /> {/* spacer */}
+                  </div>
+                  
+                  {/* Browser Content */}
+                  <div className="flex-1 w-full relative overflow-hidden bg-muted/10">
+                    <Image 
+                      src="/images/Projects/Pokemon/Screenshot 2026-06-01 184407.png"
+                      alt="Pokemon Trading Platform Desktop"
+                      fill
+                      sizes="(max-width: 768px) 75vw, 650px"
+                      className="object-cover pointer-events-none select-none"
+                      priority
+                      onDragStart={(e) => e.preventDefault()}
+                    />
+                  </div>
+                </div>
+
+                {/* Mobile Mockup Phone Frame */}
+                <div 
+                  className={`absolute right-0 bottom-6 w-[25%] aspect-[9/19] bg-white dark:bg-card border-4 border-foreground rounded-[28px] shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.15)] z-20 flex flex-col overflow-hidden transition-all duration-300 ${
+                    windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
+                  }`}
+                >
+                  {/* Mobile Screen Notch */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-3 bg-foreground rounded-full z-30 flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 rounded-full bg-muted/40 border border-foreground/30 absolute left-2.5" />
+                    <div className="w-5 h-0.5 bg-muted/30 rounded-full" />
+                  </div>
+                  
+                  {/* Mobile Content */}
+                  <div className="flex-1 w-full relative bg-muted/10 rounded-[24px] overflow-hidden">
+                    <Image 
+                      src="/images/Projects/Pokemon/Screenshot 2026-06-01 184540.png"
+                      alt="Pokemon Trading Platform Mobile"
+                      fill
+                      sizes="(max-width: 768px) 25vw, 220px"
+                      className="object-cover pointer-events-none select-none rounded-[24px]"
+                      priority
+                      onDragStart={(e) => e.preventDefault()}
+                    />
+                  </div>
+                </div>
+
+                {/* Security Watermarks */}
+                {!windowBlurred && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.06] dark:opacity-[0.1] select-none flex flex-col justify-around py-4 z-30 print:hidden">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="flex justify-around text-[9px] font-black tracking-widest text-foreground uppercase whitespace-nowrap rotate-[-20deg] scale-110"
+                        style={{ marginLeft: i % 2 === 0 ? '-30px' : '30px' }}
+                      >
+                        {Array.from({ length: 4 }).map((_, j) => (
+                          <span key={j} className="mx-4 select-none">
+                            Cenedy Palma • SECURE PREVIEW • DO NOT COPY
+                          </span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Blur Intercept Security Message */}
+                {windowBlurred && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-md p-4 text-center z-40 pointer-events-auto rounded-3xl">
+                    <div className="bg-red-600 text-white font-black text-xs sm:text-sm uppercase px-4 py-2 border-2 border-white shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-sm flex items-center gap-2 mb-3 animate-pulse">
+                      ⚠️ SECURITY LOCK ⚠️
+                    </div>
+                    <p className="text-white font-extrabold text-xs sm:text-sm max-w-[280px]">
+                      Project Mockup Protected. Focus lost or screenshot attempt blocked.
+                    </p>
+                  </div>
+                )}
+
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </SectionWrapper>
   );
 }
+
