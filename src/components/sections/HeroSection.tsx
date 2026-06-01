@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,6 +8,8 @@ import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy, Zap } from "lucide
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export function HeroSection() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
       {/* Brutalist Background Elements */}
@@ -21,16 +24,18 @@ export function HeroSection() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
         >
-          <h1 className="text-[16vw] md:text-[14vw] lg:text-[15vw] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative z-0 pointer-events-none select-none text-center drop-shadow-xl whitespace-nowrap">
+          <h1 className={`text-[16vw] md:text-[14vw] lg:text-[15vw] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative pointer-events-none select-none text-center drop-shadow-xl whitespace-nowrap transition-all duration-500 ${isHovered ? 'z-30 scale-105' : 'z-0'}`}>
             CENEDY<br />PALMA
           </h1>
           
           {/* Overlapping Hero Image Fragment */}
           <motion.div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] lg:w-[32vw] max-w-[480px] aspect-[4/5] z-10 shadow-2xl"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] lg:w-[32vw] max-w-[480px] aspect-[4/5] z-10 shadow-2xl group cursor-pointer overflow-hidden"
           >
             <Image
               src="/images/hero.png"
@@ -40,6 +45,9 @@ export function HeroSection() {
               className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
               priority
             />
+
+            {/* Blue Glass Overlay */}
+            <div className="absolute inset-0 bg-blue-500/25 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none border border-white/20" />
 
             {/* Brutalist Floating Elements */}
             <motion.div
