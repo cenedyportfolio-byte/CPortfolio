@@ -6,12 +6,18 @@ import Image from "next/image";
 import { Menu, X, Download } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { Logo } from "@/components/ui/Logo";
 
 export function Navbar() {
+  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeCv, setActiveCv] = useState<{ title: string; url: string; filename: string } | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,70 +141,73 @@ export function Navbar() {
         </nav>
       )}
       {/* CV PDF Preview Modal */}
-      <AnimatePresence>
-        {activeCv && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 md:p-6 select-none"
-            onClick={() => setActiveCv(null)}
-          >
+      {mounted && createPortal(
+        <AnimatePresence>
+          {activeCv && (
             <motion.div
-              initial={{ scale: 0.95, y: 15, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 15, opacity: 0 }}
-              transition={{ type: "spring", duration: 0.3 }}
-              className="relative w-full max-w-5xl h-[85vh] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden select-text pointer-events-auto"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 md:p-6 select-none"
+              onClick={() => setActiveCv(null)}
             >
-              {/* Browser/Document Top bar */}
-              <div className="h-14 border-b-4 border-foreground bg-muted/30 px-4 md:px-6 flex items-center justify-between shrink-0 select-none">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500 border border-foreground" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500 border border-foreground" />
-                  <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
-                  <span className="hidden sm:inline-block font-mono text-[10px] font-black uppercase bg-muted px-2.5 py-1 border border-foreground/30 rounded-md text-foreground/80 ml-3">
-                    {activeCv.title}
-                  </span>
+              <motion.div
+                initial={{ scale: 0.95, y: 15, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                exit={{ scale: 0.95, y: 15, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.3 }}
+                className="relative w-full max-w-5xl h-[80vh] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden select-text pointer-events-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Browser/Document Top bar */}
+                <div className="h-14 border-b-4 border-foreground bg-muted/30 px-4 md:px-6 flex items-center justify-between shrink-0 select-none">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500 border border-foreground" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500 border border-foreground" />
+                    <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
+                    <span className="hidden sm:inline-block font-mono text-[10px] font-black uppercase bg-muted px-2.5 py-1 border border-foreground/30 rounded-md text-foreground/80 ml-3">
+                      {activeCv.title}
+                    </span>
+                  </div>
+                  
+                  {/* Actions */}
+                  <div className="flex items-center gap-2.5">
+                    <a
+                      href={activeCv.url}
+                      download={activeCv.filename}
+                      className="inline-flex items-center gap-2 bg-primary text-white font-black text-xs px-4 py-2 border-2 border-foreground rounded-lg shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-y-px hover:translate-x-px hover:shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:translate-x-0.5 active:shadow-none transition-all cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5" /> Download PDF
+                    </a>
+                    <button
+                      onClick={() => setActiveCv(null)}
+                      className="p-2 border-2 border-foreground bg-white dark:bg-card text-foreground hover:bg-red-500 hover:text-white rounded-lg transition-colors cursor-pointer"
+                      aria-label="Close PDF preview"
+                    >
+                      <X className="w-4.5 h-4.5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Dynamic Notification bar on Mobile viewport */}
+                <div className="sm:hidden bg-amber-500/10 border-b-2 border-foreground/30 px-4 py-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 select-none">
+                  💡 Scroll to read preview, or tap the Download button to save.
                 </div>
                 
-                {/* Actions */}
-                <div className="flex items-center gap-2.5">
-                  <a
-                    href={activeCv.url}
-                    download={activeCv.filename}
-                    className="inline-flex items-center gap-2 bg-primary text-white font-black text-xs px-4 py-2 border-2 border-foreground rounded-lg shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-y-px hover:translate-x-px hover:shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:translate-x-0.5 active:shadow-none transition-all cursor-pointer"
-                  >
-                    <Download className="w-3.5 h-3.5" /> Download PDF
-                  </a>
-                  <button
-                    onClick={() => setActiveCv(null)}
-                    className="p-2 border-2 border-foreground bg-white dark:bg-card text-foreground hover:bg-red-500 hover:text-white rounded-lg transition-colors cursor-pointer"
-                    aria-label="Close PDF preview"
-                  >
-                    <X className="w-4.5 h-4.5" />
-                  </button>
+                {/* PDF Preview Frame */}
+                <div className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 relative overflow-hidden select-text pointer-events-auto">
+                  <iframe
+                    src={`${activeCv.url}#toolbar=0`}
+                    title={`${activeCv.title} Live Preview`}
+                    className="w-full h-full border-none select-text pointer-events-auto bg-white dark:bg-zinc-900"
+                  />
                 </div>
-              </div>
-
-              {/* Dynamic Notification bar on Mobile viewport */}
-              <div className="sm:hidden bg-amber-500/10 border-b-2 border-foreground/30 px-4 py-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 select-none">
-                💡 Scroll to read preview, or tap the Download button to save.
-              </div>
-              
-              {/* PDF Preview Frame */}
-              <div className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 relative overflow-hidden select-text pointer-events-auto">
-                <iframe
-                  src={`${activeCv.url}#toolbar=0`}
-                  title={`${activeCv.title} Live Preview`}
-                  className="w-full h-full border-none select-text pointer-events-auto bg-white dark:bg-zinc-900"
-                />
-              </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </header>
   );
 }
