@@ -33,10 +33,16 @@ export function AiAssistantSection() {
   };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (messages.length > 0) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTo({
+          top: chatContainerRef.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
     }
   }, [messages]);
 
@@ -81,7 +87,7 @@ export function AiAssistantSection() {
       <div className="md:w-2/3 w-full bg-card border border-border shadow-[4px_4px_0_0_var(--primary)] flex flex-col h-[500px]">
         
         {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+        <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
           {messages.length === 0 && (
             <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground gap-4">
               <Bot className="w-12 h-12 opacity-50 text-primary" />

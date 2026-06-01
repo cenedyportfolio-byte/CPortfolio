@@ -73,7 +73,12 @@ export function AboutSection() {
   // Auto-scroll to bottom of chat
   useEffect(() => {
     if (messages.length > 1 || isLoading) {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTo({
+          top: chatContainerRef.current.scrollHeight,
+          behavior: "smooth"
+        });
+      }
     }
   }, [messages, isLoading]);
 
