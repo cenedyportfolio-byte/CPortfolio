@@ -6,7 +6,7 @@ import { AiChat } from '@/models/AiChat';
 import { Analytics } from '@/models/Analytics';
 
 const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY || 'REDACTED',
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 function createFallbackModel(primary: any, secondary: any): any {

@@ -6,7 +6,7 @@ import { IdeaAnalysis } from '@/models/IdeaAnalysis';
 import { z } from 'zod';
 
 const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY || 'REDACTED',
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export const maxDuration = 30;
