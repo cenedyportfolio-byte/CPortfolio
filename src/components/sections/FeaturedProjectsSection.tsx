@@ -11,9 +11,9 @@ import Image from "next/image";
 
 export function FeaturedProjectsSection() {
   const [mounted, setMounted] = useState(false);
-  const [hoveredProject, setHoveredProject] = useState<'pokemon' | 'lce' | 'chat' | null>(null);
-  const [isOverCard, setIsOverCard] = useState<'pokemon' | 'lce' | 'chat' | null>(null);
-  const [isOverMockup, setIsOverMockup] = useState<'pokemon' | 'lce' | 'chat' | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<'pokemon' | 'lce' | 'chat' | 'intelli' | null>(null);
+  const [isOverCard, setIsOverCard] = useState<'pokemon' | 'lce' | 'chat' | 'intelli' | null>(null);
+  const [isOverMockup, setIsOverMockup] = useState<'pokemon' | 'lce' | 'chat' | 'intelli' | null>(null);
   const [windowBlurred, setWindowBlurred] = useState(false);
 
   useEffect(() => {
@@ -136,7 +136,7 @@ export function FeaturedProjectsSection() {
       thumbnail: "/images/Projects/intelli_thumb.png",
       tags: ["React", "Node.js", "OpenAI"],
       github: "https://github.com/cenedypalma",
-      demo: "https://example.com",
+      demo: "https://intellidemo-ai.onrender.com/",
     },
   ];
 
@@ -174,10 +174,17 @@ export function FeaturedProjectsSection() {
                   setIsOverCard('lce');
                 } else if (project.title === "Real-Time Chat App") {
                   setIsOverCard('chat');
+                } else if (project.title === "IntelliDemo AI") {
+                  setIsOverCard('intelli');
                 }
               }}
               onMouseLeave={() => {
-                if (project.title === "Pokemon Trading Platform" || project.title === "LCE Backend System" || project.title === "Real-Time Chat App") {
+                if (
+                  project.title === "Pokemon Trading Platform" || 
+                  project.title === "LCE Backend System" || 
+                  project.title === "Real-Time Chat App" ||
+                  project.title === "IntelliDemo AI"
+                ) {
                   setIsOverCard(null);
                 }
               }}
@@ -188,6 +195,8 @@ export function FeaturedProjectsSection() {
                   setIsOverCard(prev => prev === 'lce' ? null : 'lce');
                 } else if (project.title === "Real-Time Chat App") {
                   setIsOverCard(prev => prev === 'chat' ? null : 'chat');
+                } else if (project.title === "IntelliDemo AI") {
+                  setIsOverCard(prev => prev === 'intelli' ? null : 'intelli');
                 }
               }}
             >
@@ -227,6 +236,11 @@ export function FeaturedProjectsSection() {
                       </span>
                     )}
                     {project.title === "Real-Time Chat App" && (
+                      <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-accent/10 text-accent rounded-full border border-accent/20">
+                        <Eye className="w-2.5 h-2.5" /> Interactive App ⚡
+                      </span>
+                    )}
+                    {project.title === "IntelliDemo AI" && (
                       <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 bg-accent/10 text-accent rounded-full border border-accent/20">
                         <Eye className="w-2.5 h-2.5" /> Interactive App ⚡
                       </span>
@@ -590,10 +604,103 @@ export function FeaturedProjectsSection() {
               </div>
             </motion.div>
           )}
+
+          {hoveredProject === 'intelli' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 15 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm pointer-events-auto md:bg-transparent md:backdrop-blur-none md:pointer-events-none print:hidden select-none"
+              onClick={() => {
+                setIsOverCard(null);
+                setIsOverMockup(null);
+                setHoveredProject(null);
+              }}
+            >
+              <div 
+                className="relative w-full h-full flex items-center justify-center max-w-[850px] p-4"
+                onClick={(e) => e.stopPropagation()}
+              >
+                
+                {/* Live Interactive Browser Frame */}
+                <div 
+                  className={`relative w-[95vw] md:w-full aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 pointer-events-auto ${
+                    windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
+                  }`}
+                  onMouseEnter={() => setIsOverMockup('intelli')}
+                  onMouseLeave={() => setIsOverMockup(null)}
+                >
+                  {/* Browser Top bar */}
+                  <div className="h-10 border-b-2 border-foreground bg-muted/30 px-4 flex items-center justify-between shrink-0 select-none">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500 border border-foreground" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500 border border-foreground" />
+                      <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
+                    </div>
+                    <div className="w-1/2 h-6 rounded-md border border-foreground bg-background px-3 flex items-center text-[10px] text-muted-foreground tracking-wide font-mono select-text">
+                      intellidemo-ai.onrender.com
+                    </div>
+                    <a 
+                      href="https://intellidemo-ai.onrender.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-primary font-bold hover:underline flex items-center gap-1 select-none"
+                    >
+                      Open Live App <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                  
+                  {/* Live Iframe App Content */}
+                  <div className="flex-1 w-full bg-white dark:bg-zinc-950 relative overflow-hidden select-text pointer-events-auto">
+                    <iframe 
+                      src="https://intellidemo-ai.onrender.com/"
+                      title="IntelliDemo AI Live Preview"
+                      className="w-full h-full border-none select-text pointer-events-auto bg-white dark:bg-zinc-950"
+                      allow="clipboard-write; camera; microphone"
+                    />
+                  </div>
+                </div>
+
+                {/* Security Watermarks */}
+                {!windowBlurred && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.04] dark:opacity-[0.07] select-none flex flex-col justify-around py-4 z-30 print:hidden">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="flex justify-around text-[9px] font-black tracking-widest text-foreground uppercase whitespace-nowrap rotate-[-20deg] scale-110"
+                        style={{ marginLeft: i % 2 === 0 ? '-30px' : '30px' }}
+                      >
+                        {Array.from({ length: 4 }).map((_, j) => (
+                          <span key={j} className="mx-4 select-none">
+                            Cenedy Palma • SECURE PREVIEW • DO NOT COPY
+                          </span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Blur Intercept Security Message */}
+                {windowBlurred && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-md p-4 text-center z-40 pointer-events-auto rounded-3xl">
+                    <div className="bg-red-600 text-white font-black text-xs sm:text-sm uppercase px-4 py-2 border-2 border-white shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-sm flex items-center gap-2 mb-3 animate-pulse">
+                      ⚠️ SECURITY LOCK ⚠️
+                    </div>
+                    <p className="text-white font-extrabold text-xs sm:text-sm max-w-[280px]">
+                      Project Preview Protected. Focus lost or screenshot attempt blocked.
+                    </p>
+                  </div>
+                )}
+
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>,
         document.body
       )}
     </SectionWrapper>
   );
 }
-

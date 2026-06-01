@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,9 +10,7 @@ export function Footer() {
       <div className="container mx-auto px-4 md:px-8 max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
-            CP
-          </div>
+          <Logo size={32} />
           <span className="text-sm text-muted-foreground">
             &copy; {currentYear} Cenedy Udoy Palma. All rights reserved.
           </span>
