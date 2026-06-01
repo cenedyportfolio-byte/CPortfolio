@@ -49,14 +49,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link
-            href="#top"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="flex items-center gap-2.5"
-          >
+          <Link href="/" className="flex items-center gap-2.5">
             <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border bg-muted flex items-center justify-center shrink-0">
               <Image
                 src="/images/hero.png"
@@ -75,12 +68,6 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                onClick={(e) => {
-                  if (link.href.startsWith("#")) {
-                    e.preventDefault();
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 {link.name}
@@ -118,13 +105,7 @@ export function Navbar() {
               key={link.name}
               href={link.href}
               className="text-base font-medium text-foreground py-2.5 px-3 rounded-lg hover:bg-muted transition-colors"
-              onClick={(e) => {
-                setMobileMenuOpen(false);
-                if (link.href.startsWith("#")) {
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
+              onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
             </Link>
