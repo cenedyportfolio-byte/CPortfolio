@@ -8,7 +8,7 @@ import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
+    <section id="top" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
       {/* Brutalist Background Elements */}
       <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-primary/5 blur-[120px] rounded-none pointer-events-none will-change-transform" />
       <div className="absolute bottom-0 left-0 w-[40vw] h-[40vh] bg-accent/5 blur-[100px] rounded-none pointer-events-none will-change-transform" />
