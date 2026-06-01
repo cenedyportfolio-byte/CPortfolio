@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { SectionWrapper, motionItem } from "@/components/layout/SectionWrapper";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -8,23 +9,11 @@ import { GraduationCap, Award, Trophy, Star, Medal, Eye } from "lucide-react";
 
 export function ExperienceSection() {
   const [hoveredCert, setHoveredCert] = useState<'blockchain' | 'internship' | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (typeof window === "undefined") return;
-    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
-
-    // Boundary safety: shift position left/up if tooltip hits viewport edge
-    const tooltipWidth = 360;
-    const tooltipHeight = 270;
-    const xOffset = e.clientX + tooltipWidth > window.innerWidth ? -(tooltipWidth + 20) : 20;
-    const yOffset = e.clientY + tooltipHeight > window.innerHeight ? -(tooltipHeight + 20) : 20;
-
-    setMousePos({
-      x: e.clientX + xOffset,
-      y: e.clientY + yOffset,
-    });
-  };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const experiences = [
     {
@@ -127,7 +116,6 @@ export function ExperienceSection() {
                   <p 
                     onMouseEnter={() => setHoveredCert('internship')}
                     onMouseLeave={() => setHoveredCert(null)}
-                    onMouseMove={handleMouseMove}
                     className="text-sm text-primary font-medium mb-2 hover:text-primary/80 transition-colors cursor-help inline-flex items-center gap-1.5"
                   >
                     {exp.company}
@@ -183,7 +171,6 @@ export function ExperienceSection() {
                       <p 
                         onMouseEnter={() => setHoveredCert('blockchain')}
                         onMouseLeave={() => setHoveredCert(null)}
-                        onMouseMove={handleMouseMove}
                         className="text-sm font-semibold text-foreground hover:text-primary transition-colors cursor-help inline-flex items-center gap-2 flex-wrap"
                       >
                         {achievement.title}
@@ -206,36 +193,38 @@ export function ExperienceSection() {
 
       </div>
 
-      {/* Dynamic Floating Certificate Tooltip Preview */}
-      <AnimatePresence>
-        {hoveredCert && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 10 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed pointer-events-none z-[9999] rounded-xl overflow-hidden border border-white/20 shadow-2xl p-2.5 glass w-[280px] sm:w-[360px] aspect-[4/3] flex flex-col gap-2"
-            style={{
-              left: mousePos.x,
-              top: mousePos.y,
-            }}
-          >
-            <div className="relative w-full h-full rounded-lg overflow-hidden border border-border">
-              <Image 
-                src={hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' : '/images/cert-internship.jpg'}
-                alt="Certificate Preview"
-                fill
-                sizes="(max-width: 768px) 260px, 340px"
-                className="object-contain bg-[#0F172A]"
-                priority
-              />
-            </div>
-            <div className="text-[8px] font-black uppercase tracking-widest text-center text-muted-foreground">
-              Verify Credentials // Interactive Preview
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Dynamic Centered Certificate Overlay Preview via Portal */}
+      {mounted && typeof document !== "undefined" && (
+        <AnimatePresence>
+          {hoveredCert && createPortal(
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none bg-black/40 backdrop-blur-sm">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 15 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 w-[92vw] sm:w-[85vw] max-w-[850px] aspect-[1.414/1] flex flex-col gap-3 pointer-events-none"
+              >
+                <div className="relative w-full h-full border-2 border-foreground bg-muted/20">
+                  <Image 
+                    src={hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' : '/images/cert-internship.jpg'}
+                    alt="Certificate Preview"
+                    fill
+                    sizes="(max-width: 768px) 92vw, 850px"
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <div className="flex justify-between items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-muted-foreground border-t border-foreground/10 pt-2 shrink-0">
+                  <span>Verification ID // Interactive Showcase</span>
+                  <span className="text-primary font-bold">Cenedy Udoy Palma</span>
+                </div>
+              </motion.div>
+            </div>,
+            document.body
+          )}
+        </AnimatePresence>
+      )}
     </SectionWrapper>
   );
 }
