@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cenedypalma.com"),
+  metadataBase: new URL("https://cenedy.is-a.dev"),
   title: {
     default: "Cenedy Udoy Palma | Software Engineer & Product Builder",
     template: "%s | Cenedy Udoy Palma"
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Web Developer Dhaka",
     "Portfolio"
   ],
-  authors: [{ name: "Cenedy Udoy Palma", url: "https://cenedypalma.com" }],
+  authors: [{ name: "Cenedy Udoy Palma", url: "https://cenedy.is-a.dev" }],
   creator: "Cenedy Udoy Palma",
   robots: {
     index: true,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://cenedypalma.com",
+    url: "https://cenedy.is-a.dev",
     title: "Cenedy Udoy Palma | Full Stack Developer & Product Builder",
     description: "I research problems, plan solutions, design experiences, and build scalable full-stack applications. Discover my work.",
     siteName: "Cenedy Udoy Palma Portfolio",
