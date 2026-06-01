@@ -12,6 +12,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
+  const [activeCv, setActiveCv] = useState<{ title: string; url: string; filename: string } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +23,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (mobileMenuOpen) {
+    if (mobileMenuOpen || activeCv) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -30,7 +31,7 @@ export function Navbar() {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, activeCv]);
 
   const navLinks = [
     { name: "Home", href: "#top" },
@@ -53,7 +54,15 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <Logo size={36} />
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border bg-muted flex items-center justify-center shrink-0">
+              <Image
+                src="/images/hero.png"
+                alt="Cenedy Palma Logo"
+                fill
+                sizes="36px"
+                className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-300"
+              />
+            </div>
             <span className="text-lg font-bold text-foreground">Cenedy Palma</span>
           </Link>
 
@@ -92,22 +101,46 @@ export function Navbar() {
                 >
                   <a
                     href="/CV/Cenedy Udoy Palma.pdf"
-                    download="Cenedy Udoy Palma.pdf"
-                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveCv({
+                        title: "Software Engineer CV (General)",
+                        url: "/CV/Cenedy Udoy Palma.pdf",
+                        filename: "Cenedy Udoy Palma.pdf"
+                      });
+                      setCvDropdownOpen(false);
+                    }}
+                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50 cursor-pointer"
                   >
                     💼 Software Engineer CV (General)
                   </a>
                   <a
                     href="/CV/it_industry.pdf"
-                    download="Cenedy Udoy Palma - IT Industry CV.pdf"
-                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveCv({
+                        title: "IT Industry CV",
+                        url: "/CV/it_industry.pdf",
+                        filename: "Cenedy Udoy Palma - IT Industry CV.pdf"
+                      });
+                      setCvDropdownOpen(false);
+                    }}
+                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50 cursor-pointer"
                   >
                     🛠️ IT Industry CV
                   </a>
                   <a
                     href="/CV/Candy_letex_cv_For_US_salimsazzed.pdf"
-                    download="Cenedy Udoy Palma - US Format CV.pdf"
-                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveCv({
+                        title: "US Format CV",
+                        url: "/CV/Candy_letex_cv_For_US_salimsazzed.pdf",
+                        filename: "Cenedy Udoy Palma - US Format CV.pdf"
+                      });
+                      setCvDropdownOpen(false);
+                    }}
+                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors cursor-pointer"
                   >
                     🌐 US Format CV
                   </a>
@@ -144,31 +177,117 @@ export function Navbar() {
             <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-3 mb-1">Download CV Options:</p>
             <a
               href="/CV/Cenedy Udoy Palma.pdf"
-              download="Cenedy Udoy Palma.pdf"
-              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveCv({
+                  title: "Software Engineer CV (General)",
+                  url: "/CV/Cenedy Udoy Palma.pdf",
+                  filename: "Cenedy Udoy Palma.pdf"
+                });
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors cursor-pointer"
             >
               💼 Software Engineer CV (General)
             </a>
             <a
               href="/CV/it_industry.pdf"
-              download="Cenedy Udoy Palma - IT Industry CV.pdf"
-              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveCv({
+                  title: "IT Industry CV",
+                  url: "/CV/it_industry.pdf",
+                  filename: "Cenedy Udoy Palma - IT Industry CV.pdf"
+                });
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors cursor-pointer"
             >
               🛠️ IT Industry CV
             </a>
             <a
               href="/CV/Candy_letex_cv_For_US_salimsazzed.pdf"
-              download="Cenedy Udoy Palma - US Format CV.pdf"
-              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveCv({
+                  title: "US Format CV",
+                  url: "/CV/Candy_letex_cv_For_US_salimsazzed.pdf",
+                  filename: "Cenedy Udoy Palma - US Format CV.pdf"
+                });
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors cursor-pointer"
             >
               🌐 US Format CV
             </a>
           </div>
         </nav>
       )}
+      {/* CV PDF Preview Modal */}
+      <AnimatePresence>
+        {activeCv && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 md:p-6 select-none"
+            onClick={() => setActiveCv(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.3 }}
+              className="relative w-full max-w-5xl h-[85vh] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden select-text pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Browser/Document Top bar */}
+              <div className="h-14 border-b-4 border-foreground bg-muted/30 px-4 md:px-6 flex items-center justify-between shrink-0 select-none">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500 border border-foreground" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500 border border-foreground" />
+                  <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
+                  <span className="hidden sm:inline-block font-mono text-[10px] font-black uppercase bg-muted px-2.5 py-1 border border-foreground/30 rounded-md text-foreground/80 ml-3">
+                    {activeCv.title}
+                  </span>
+                </div>
+                
+                {/* Actions */}
+                <div className="flex items-center gap-2.5">
+                  <a
+                    href={activeCv.url}
+                    download={activeCv.filename}
+                    className="inline-flex items-center gap-2 bg-primary text-white font-black text-xs px-4 py-2 border-2 border-foreground rounded-lg shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-y-px hover:translate-x-px hover:shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:translate-x-0.5 active:shadow-none transition-all cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" /> Download PDF
+                  </a>
+                  <button
+                    onClick={() => setActiveCv(null)}
+                    className="p-2 border-2 border-foreground bg-white dark:bg-card text-foreground hover:bg-red-500 hover:text-white rounded-lg transition-colors cursor-pointer"
+                    aria-label="Close PDF preview"
+                  >
+                    <X className="w-4.5 h-4.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Dynamic Notification bar on Mobile viewport */}
+              <div className="sm:hidden bg-amber-500/10 border-b-2 border-foreground/30 px-4 py-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 select-none">
+                💡 Scroll to read preview, or tap the Download button to save.
+              </div>
+              
+              {/* PDF Preview Frame */}
+              <div className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 relative overflow-hidden select-text pointer-events-auto">
+                <iframe
+                  src={`${activeCv.url}#toolbar=0`}
+                  title={`${activeCv.title} Live Preview`}
+                  className="w-full h-full border-none select-text pointer-events-auto bg-white dark:bg-zinc-900"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
