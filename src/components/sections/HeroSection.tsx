@@ -24,7 +24,7 @@ export function HeroSection() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
         >
-          <h1 className={`text-[16vw] md:text-[14vw] lg:text-[15vw] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative pointer-events-none select-none text-center drop-shadow-xl whitespace-nowrap transition-all duration-500 ${isHovered ? 'z-30 scale-105' : 'z-0'}`}>
+          <h1 className={`text-[clamp(2.2rem,13vw,11rem)] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative pointer-events-none select-none text-center drop-shadow-xl whitespace-nowrap transition-all duration-500 ${isHovered ? 'z-30 scale-105' : 'z-0'}`}>
             CENEDY<br />PALMA
           </h1>
           

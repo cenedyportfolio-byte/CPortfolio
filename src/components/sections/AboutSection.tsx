@@ -100,7 +100,7 @@ export function AboutSection() {
       <div className="flex flex-col lg:flex-row items-stretch border-t border-border">
         
         {/* Left — Sticky Bio (Asymmetric Tension 30%) */}
-        <div className="w-full lg:w-[35%] lg:sticky lg:top-0 lg:h-screen lg:max-h-[1000px] border-b lg:border-b-0 lg:border-r border-border bg-muted/20 p-6 md:p-12 flex flex-col justify-center relative overflow-hidden">
+        <div className="w-full lg:w-[35%] lg:sticky lg:top-0 lg:h-screen lg:max-h-[1000px] border-b lg:border-b-0 lg:border-r border-border bg-muted/20 p-6 md:p-12 flex flex-col lg:justify-start xl:justify-center relative overflow-y-auto scrollbar-none overscroll-contain lg:py-12">
           <div className="absolute top-0 right-0 w-full h-[30%] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
           
           <motion.div variants={motionItem} className="relative z-10 w-full max-w-sm mx-auto lg:mx-0">
