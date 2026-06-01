@@ -136,7 +136,12 @@ export function FeaturedProjectsSection() {
       </motion.div>
 
       <motion.div variants={motionItem} className="w-full overflow-hidden relative before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-24 before:bg-gradient-to-r before:from-background before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-24 after:bg-gradient-to-l after:from-background after:to-transparent py-6">
-        <div className="flex w-max gap-6 animate-infinite-slide-slow hover:[animation-play-state:paused]">
+        <div 
+          className="flex w-max gap-6 animate-infinite-slide-slow"
+          style={{
+            animationPlayState: hoveredProject === 'pokemon' ? 'paused' : 'running'
+          }}
+        >
           {[...projects, ...projects, ...projects].map((project, index) => (
             <div 
               key={index} 
@@ -149,6 +154,11 @@ export function FeaturedProjectsSection() {
               onMouseLeave={() => {
                 if (project.title === "Pokemon Trading Platform") {
                   setHoveredProject(null);
+                }
+              }}
+              onClick={() => {
+                if (project.title === "Pokemon Trading Platform") {
+                  setHoveredProject(prev => prev === 'pokemon' ? null : 'pokemon');
                 }
               }}
             >
@@ -205,13 +215,17 @@ export function FeaturedProjectsSection() {
               transition={{ duration: 0.2, ease: "easeOut" }}
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none select-none print:hidden w-[95vw] max-w-[1000px] h-[60vh] max-h-[600px] flex items-center justify-center"
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm pointer-events-auto md:bg-transparent md:backdrop-blur-none md:pointer-events-none print:hidden select-none"
+              onClick={() => setHoveredProject(null)}
             >
-              <div className="relative w-full h-full flex items-center justify-start max-w-[850px] p-4">
+              <div 
+                className="relative w-full h-full flex items-center justify-center md:justify-start max-w-[850px] p-4"
+                onClick={(e) => e.stopPropagation()}
+              >
                 
                 {/* Desktop Mockup Browser Frame */}
                 <div 
-                  className={`relative w-[78%] aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 ${
+                  className={`relative w-[78%] aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 hidden md:flex ${
                     windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
                   }`}
                 >
@@ -244,9 +258,9 @@ export function FeaturedProjectsSection() {
 
                 {/* Mobile Mockup Phone Frame */}
                 <div 
-                  className={`absolute right-0 bottom-6 w-[25%] aspect-[9/19] bg-white dark:bg-card border-4 border-foreground rounded-[28px] shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.15)] z-20 flex flex-col overflow-hidden transition-all duration-300 ${
+                  className={`bg-white dark:bg-card border-4 border-foreground rounded-[28px] shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.15)] z-20 flex flex-col overflow-hidden transition-all duration-300 ${
                     windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
-                  }`}
+                  } md:absolute md:right-0 md:bottom-6 md:w-[25%] md:aspect-[9/19] w-[70vw] max-w-[280px] aspect-[9/19]`}
                 >
                   {/* Mobile Screen Notch */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-3 bg-foreground rounded-full z-30 flex items-center justify-center">
