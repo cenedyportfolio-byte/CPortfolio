@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy } from "lucide-react";
+import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy, Zap } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export function HeroSection() {
@@ -58,7 +58,7 @@ export function HeroSection() {
               className="absolute -bottom-8 -right-8 bg-background border border-foreground px-6 py-4 shadow-[8px_8px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,1)] z-40 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_rgba(255,255,255,1)] transition-all duration-300"
             >
               <div className="flex items-center gap-3">
-                <span className="text-2xl">⚡</span>
+                <Zap className="w-6 h-6 text-primary fill-primary animate-pulse" />
                 <div>
                   <p className="text-sm font-black text-foreground uppercase tracking-widest">Problem Solver</p>
                   <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">By Architecture</p>

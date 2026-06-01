@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Rocket } from "lucide-react";
 
 export function ContactSection() {
   return (
@@ -17,8 +17,9 @@ export function ContactSection() {
           >
             {/* Left — CTA */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                {"Let's build something amazing together! 🚀"}
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 flex items-center gap-2">
+                <span>Let&apos;s build something amazing together!</span>
+                <Rocket className="w-8 h-8 text-white animate-pulse inline-block" />
               </h2>
               <p className="text-white/80 text-lg max-w-xl">
                 {"I'm always open to new opportunities and interesting projects."}
