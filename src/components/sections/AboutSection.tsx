@@ -105,7 +105,7 @@ export function AboutSection() {
           
           <motion.div variants={motionItem} className="relative z-10 w-full max-w-sm mx-auto lg:mx-0">
             {/* Brutalist Photo Frame */}
-            <div className="relative w-full aspect-square overflow-hidden border border-foreground shadow-[8px_8px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,0.05)] mb-8 transition-all duration-500">
+            <div className="relative w-full aspect-square overflow-hidden border border-foreground shadow-[8px_8px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,0.05)] mb-6 transition-all duration-500">
               <Image
                 src="/images/about.png"
                 alt="Cenedy Udoy Palma — About"
@@ -121,23 +121,23 @@ export function AboutSection() {
 
             {/* Brutalist Bio */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-6">
+              <h2 className="text-4xl md:text-5xl font-black text-foreground uppercase tracking-tight leading-[0.9] mb-4">
                 Beyond <br /><span className="text-primary">Code</span>
               </h2>
-              <p className="text-sm font-medium text-muted-foreground leading-relaxed mb-8">
+              <p className="text-sm font-medium text-muted-foreground leading-relaxed mb-6">
                 I turn complex problems into simple, elegant products. I am a Full Stack Developer and Product Builder passionate about writing high-performance code, system architecture, leadership, and continuous learning.
               </p>
               
-              {/* Traits Stacked */}
-              <div className="space-y-3">
+              {/* Traits Grid */}
+              <div className="grid grid-cols-2 gap-4">
                 {traits.map((trait, index) => (
-                  <motion.div key={trait.title} variants={motionItem} custom={index} className="flex items-center gap-4 group">
-                    <div className={`w-8 h-8 flex items-center justify-center border border-border group-hover:border-foreground transition-colors ${trait.color} bg-background`}>
+                  <motion.div key={trait.title} variants={motionItem} custom={index} className="flex items-start gap-3 group">
+                    <div className={`w-8 h-8 shrink-0 flex items-center justify-center border border-border group-hover:border-foreground transition-colors ${trait.color} bg-background`}>
                       {trait.icon}
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-foreground uppercase tracking-wider">{trait.title}</h4>
-                      <p className="text-[10px] text-muted-foreground">{trait.description}</p>
+                      <h4 className="text-[10px] sm:text-xs font-black text-foreground uppercase tracking-wider">{trait.title}</h4>
+                      <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-snug">{trait.description}</p>
                     </div>
                   </motion.div>
                 ))}
