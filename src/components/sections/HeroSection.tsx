@@ -145,7 +145,7 @@ export function HeroSection() {
         <div className="container mx-auto px-4 max-w-[1400px]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x divide-foreground/10">
             {[
-              { value: "05+", label: "Years Experience", icon: <Briefcase className="w-4 h-4" /> },
+              { value: `${String(new Date().getFullYear() - 2021).padStart(2, '0')}+`, label: "Years Experience", icon: <Briefcase className="w-4 h-4" /> },
               { value: "10+", label: "Projects Delivered", icon: <FolderGit className="w-4 h-4" /> },
               { value: "06+", label: "Core Technologies", icon: <Cpu className="w-4 h-4" /> },
               { value: "∞", label: "Problems Solved", icon: <Trophy className="w-4 h-4" /> },
