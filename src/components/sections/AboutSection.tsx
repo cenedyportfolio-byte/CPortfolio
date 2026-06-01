@@ -4,9 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { SectionWrapper, motionItem } from "@/components/layout/SectionWrapper";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useChat, UIMessage } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 import { Lightbulb, Code2, Users, Activity, Sparkles, Send, Bot, MessageSquare } from "lucide-react";
+import { useVisitor } from "@/components/providers/VisitorProvider";
 
 export function AboutSection() {
+  const visitor = useVisitor();
   const traits = [
     {
       title: "Product Mindset",
@@ -34,17 +38,25 @@ export function AboutSection() {
     },
   ];
 
-  // AI Assistant Chat States
-  const [messages, setMessages] = useState<Array<{ role: "user" | "assistant"; content: string }>>([
-    {
-      role: "assistant",
-      content: "Hi! I'm Cenedy AI. I'm trained on Cenedy's career history, technical projects, achievements, and skills. Ask me anything, or select a quick question on the right!",
-    },
-  ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [typingMessage, setTypingMessage] = useState("");
+  const [input, setInput] = useState('');
 
+  const { messages, sendMessage, status } = useChat<UIMessage>({
+    transport: new DefaultChatTransport({
+      api: '/api/chat',
+      body: {
+        visitorId: visitor?.visitorId || 'anonymous'
+      }
+    }),
+    messages: [
+      {
+        id: '1',
+        role: "assistant" as const,
+        parts: [{ type: 'text' as const, text: "Hi! I'm Cenedy AI. I'm trained on Cenedy's career history, technical projects, achievements, and skills. Ask me anything, or select a quick question on the right!" }]
+      }
+    ]
+  });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
   const chatEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -61,57 +73,14 @@ export function AboutSection() {
   // Auto-scroll to bottom of chat
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, typingMessage, isLoading]);
+  }, [messages, isLoading]);
 
   const handleSend = async (textToSend?: string) => {
     const text = textToSend || input;
-    if (!text.trim() || isLoading) return;
+    if (!text || !text.trim() || isLoading) return;
 
-    const userMessage = { role: "user" as const, content: text };
-    setMessages((prev) => [...prev, userMessage]);
+    sendMessage({ text });
     setInput("");
-    setIsLoading(true);
-    setTypingMessage("");
-
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [...messages, userMessage],
-        }),
-      });
-
-      if (!response.ok) throw new Error("Failed to connect to assistant");
-
-      const reader = response.body?.getReader();
-      if (!reader) throw new Error("No reader available");
-
-      const decoder = new TextDecoder();
-      let accumulatedResponse = "";
-
-      setIsLoading(false); // Switch off loading once stream begins
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        accumulatedResponse += chunk;
-        setTypingMessage(accumulatedResponse);
-      }
-
-      setMessages((prev) => [...prev, { role: "assistant" as const, content: accumulatedResponse }]);
-      setTypingMessage("");
-    } catch (error) {
-      console.error(error);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant" as const, content: "I'm sorry, I've run into a technical issue. Please try submitting your question again." },
-      ]);
-    } finally {
-      setIsLoading(false);
-      setTypingMessage("");
-    }
   };
 
   return (
@@ -226,29 +195,13 @@ export function AboutSection() {
                               ? "bg-foreground text-background"
                               : "bg-card text-foreground markdown-chat shadow-[4px_4px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_rgba(255,255,255,0.05)]"
                           }`}>
-                            {msg.content}
+                            {msg.parts ? msg.parts.filter(p => p.type === 'text').map(p => (p as { text: string }).text).join('') : ''}
                           </div>
                         </motion.div>
                       ))}
 
-                      {/* Stream Output */}
-                      {typingMessage && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="flex items-start gap-3 max-w-[90%] mr-auto"
-                        >
-                          <div className="w-8 h-8 shrink-0 flex items-center justify-center border border-foreground bg-background text-primary">
-                            <Bot className="w-4 h-4" />
-                          </div>
-                          <div className="p-4 border border-foreground bg-card text-foreground font-medium leading-relaxed whitespace-pre-wrap markdown-chat shadow-[4px_4px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_rgba(255,255,255,0.05)]">
-                            {typingMessage}
-                          </div>
-                        </motion.div>
-                      )}
-
                       {/* Loading Animation */}
-                      {isLoading && !typingMessage && (
+                      {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
@@ -286,7 +239,7 @@ export function AboutSection() {
                       />
                       <button
                         type="submit"
-                        disabled={isLoading || !input.trim()}
+                        disabled={isLoading || !input || !input.trim()}
                         className="absolute right-2 p-2 bg-foreground text-background hover:bg-primary hover:text-white disabled:opacity-50 transition-colors cursor-pointer border border-foreground"
                       >
                         <Send className="w-4 h-4" />

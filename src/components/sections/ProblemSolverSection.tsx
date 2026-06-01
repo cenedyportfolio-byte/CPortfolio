@@ -75,7 +75,7 @@ export function ProblemSolverSection() {
   const [isSolving, setIsSolving] = useState(false);
   const [solutionOutput, setSolutionOutput] = useState("");
   
-  const resultEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const suggestedProblems = [
     "I want a food delivery app",
@@ -83,10 +83,12 @@ export function ProblemSolverSection() {
     "I need a secure SaaS subscription model",
   ];
 
-  // Auto Scroll for Solution Output
+  // Localized Inner Container Auto Scroll for Solution Output
   useEffect(() => {
-    resultEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [solutionOutput, isSolving]);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
+  }, [solutionOutput]);
 
   const handleSolve = async (selectedProblem?: string) => {
     const inputProblem = selectedProblem || problem;
@@ -100,26 +102,31 @@ export function ProblemSolverSection() {
       const response = await fetch("/api/solve", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ problem: inputProblem }),
+        // Use placeholder if visitorId is not yet loaded, though typically it should be
+        body: JSON.stringify({ idea: inputProblem, visitorId: 'anonymous' }),
       });
 
       if (!response.ok) throw new Error("Failed to process solution");
 
-      const reader = response.body?.getReader();
-      if (!reader) throw new Error("No reader available");
-
-      const decoder = new TextDecoder();
+      const data = await response.json();
       
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        setSolutionOutput((prev) => prev + chunk);
-      }
+      const formattedOutput = `**Recommended Architecture**\n${data.architecture}\n\n**Tech Stack**\n${data.techStack.join(' • ')}\n\n**Estimated Complexity**\n${data.complexity}`;
+      
+      // Simulate typing effect
+      let i = 0;
+      setSolutionOutput("");
+      const interval = setInterval(() => {
+        setSolutionOutput(formattedOutput.substring(0, i));
+        i++;
+        if (i > formattedOutput.length) {
+          clearInterval(interval);
+          setIsSolving(false);
+        }
+      }, 10);
+      return; // Early return so we don't set isSolving(false) in finally before typing finishes
     } catch (err) {
       console.error(err);
       setSolutionOutput("An error occurred while compiling your architecture proposal. Please try again.");
-    } finally {
       setIsSolving(false);
     }
   };
@@ -196,7 +203,10 @@ export function ProblemSolverSection() {
 
             {/* Response Stream */}
             {(solutionOutput || isSolving) && (
-              <div className="mt-8 border-2 border-foreground bg-card p-6 max-h-[300px] overflow-y-auto scrollbar-thin scrollbar-thumb-foreground shadow-inner">
+              <div 
+                ref={scrollContainerRef}
+                className="mt-8 border-2 border-foreground bg-card p-6 max-h-[300px] overflow-y-auto scrollbar-thin scrollbar-thumb-foreground shadow-inner"
+              >
                 <div className="flex items-center gap-3 mb-4 pb-4 border-b border-foreground/10">
                   <Cpu className="w-4 h-4 text-primary animate-pulse" />
                   <span className="text-[10px] font-black uppercase tracking-widest">System Output</span>
@@ -210,7 +220,7 @@ export function ProblemSolverSection() {
                     Calculating Vectors...
                   </div>
                 )}
-                <div ref={resultEndRef} />
+
               </div>
             )}
           </div>

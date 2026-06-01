@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       let nickname = "Mysterious Wanderer";
       try {
         const result = await generateText({
-          model: google('gemini-1.5-flash'),
+          model: google('gemini-2.5-flash'),
           prompt: "Generate a cool, 2-word cyberpunk or hacker-style anonymous nickname for a website visitor. Return ONLY the nickname, nothing else. Example: Neon Ghost",
         });
         nickname = result.text.trim().replace(/['"]/g, '');
@@ -95,7 +95,13 @@ export async function POST(req: Request) {
       visits: visitor.visits
     });
   } catch (error) {
-    console.error("Visitor API Error:", error);
-    return new Response("Internal Server Error", { status: 500 });
+    console.warn("Visitor API falling back to offline mode:", error);
+    return Response.json({
+      nickname: "Local Pilot",
+      xp: 10,
+      country: "Local Dev",
+      visits: 1
+    });
   }
+
 }

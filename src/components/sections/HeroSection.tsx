@@ -15,14 +15,13 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 md:px-8 max-w-[1400px] relative z-10 flex-1 flex flex-col justify-center">
         
-        {/* Massive Typographic Hero */}
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
         >
-          <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative z-20 pointer-events-none select-none text-center drop-shadow-xl">
+          <h1 className="text-[16vw] md:text-[14vw] lg:text-[15vw] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative z-0 pointer-events-none select-none text-center drop-shadow-xl whitespace-nowrap">
             CENEDY<br />PALMA
           </h1>
           
@@ -31,10 +30,8 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-[40%] -translate-y-1/2 w-[55vw] md:w-[24vw] max-w-[340px] aspect-[3/4] z-10 shadow-2xl"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[30vw] lg:w-[32vw] max-w-[480px] aspect-[4/5] z-10 shadow-2xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40 mix-blend-multiply dark:mix-blend-color-dodge transition-opacity duration-500 hover:opacity-0 z-20" />
-            <div className="absolute inset-0 border-[1px] border-foreground/20 z-30 pointer-events-none" />
             <Image
               src="/images/hero.png"
               alt="Cenedy Udoy Palma"
@@ -69,6 +66,7 @@ export function HeroSection() {
               </div>
             </motion.div>
           </motion.div>
+
         </motion.div>
 
         {/* Asymmetric Bottom Content */}

@@ -7,9 +7,7 @@ import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsS
 import { TechStackSection } from "@/components/sections/TechStackSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { AiAssistantSection } from "@/components/sections/AiAssistantSection";
-import { ProblemSolverLab } from "@/components/sections/ProblemSolverLab";
-import { CommunityLeaderboard } from "@/components/sections/CommunityLeaderboard";
+import { InteractiveConsole } from "@/components/sections/InteractiveConsole";
 
 export default function Home() {
   const jsonLd = {
@@ -61,11 +59,10 @@ export default function Home() {
       
       <main id="main-content">
         <HeroSection />
-        <CommunityLeaderboard />
-        <AiAssistantSection />
+        <InteractiveConsole />
         <AboutSection />
-        <ProblemSolverLab />
         <ProblemSolverSection />
+
         <FeaturedProjectsSection />
         <TechStackSection />
         <ExperienceSection />

@@ -8,18 +8,39 @@ interface VisitorContextType {
   xp: number;
   country: string | null;
   visits: number;
+  grantXp: (amount: number) => Promise<void>;
 }
 
 const VisitorContext = createContext<VisitorContextType | undefined>(undefined);
 
 export function VisitorProvider({ children }: { children: React.ReactNode }) {
-  const [visitorData, setVisitorData] = useState<VisitorContextType>({
-    visitorId: null,
-    nickname: null,
+  const [visitorData, setVisitorData] = useState({
+    visitorId: null as string | null,
+    nickname: null as string | null,
     xp: 0,
-    country: null,
+    country: null as string | null,
     visits: 0
   });
+
+  const grantXp = async (amount: number) => {
+    if (!visitorData.visitorId) return;
+    try {
+      const res = await fetch('/api/visitor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ visitorId: visitorData.visitorId, action: 'grant_xp' })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setVisitorData(prev => ({
+          ...prev,
+          xp: data.xp
+        }));
+      }
+    } catch (e) {
+      console.error("Failed to grant XP", e);
+    }
+  };
 
   useEffect(() => {
     async function initVisitor() {
@@ -56,7 +77,7 @@ export function VisitorProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <VisitorContext.Provider value={visitorData}>
+    <VisitorContext.Provider value={{ ...visitorData, grantXp }}>
       {children}
     </VisitorContext.Provider>
   );
