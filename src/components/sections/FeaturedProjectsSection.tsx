@@ -93,6 +93,7 @@ export function FeaturedProjectsSection() {
       subtitle: "Intelligent Security System",
       description: "AI-powered personal safety app with voice commands, emergency alerts and real-time location.",
       gradient: "from-primary via-primary/80 to-secondary",
+      thumbnail: "/images/Projects/savior_thumb.png",
       tags: ["Flutter", "Firebase", "Alan AI", "Dart"],
       github: "https://github.com",
       demo: "https://example.com",
@@ -102,6 +103,7 @@ export function FeaturedProjectsSection() {
       subtitle: "Trading Platform",
       description: "Trading platform integrated with Shopify for Pokemon card collectors.",
       gradient: "from-accent via-accent/80 to-success",
+      thumbnail: "/images/Projects/pokemon_thumb.png",
       tags: ["Node.js", "React", "MongoDB"],
       github: "https://github.com",
       demo: "https://pokemon-cards-rouge.vercel.app/",
@@ -111,6 +113,7 @@ export function FeaturedProjectsSection() {
       subtitle: "Backend System",
       description: "Modular Laravel backend with REST APIs for scalable application services.",
       gradient: "from-secondary via-secondary/80 to-accent",
+      thumbnail: "/images/Projects/lce_thumb.png",
       tags: ["Laravel", "React", "MySQL"],
       github: "https://github.com",
       demo: "https://laundry-care-express.vercel.app/",
@@ -120,6 +123,7 @@ export function FeaturedProjectsSection() {
       subtitle: "Real-Time Chat",
       description: "Real-time messaging platform using WebSockets for low latency communication.",
       gradient: "from-success via-success/80 to-primary",
+      thumbnail: "/images/Projects/chat_thumb.png",
       tags: ["Node.js", "TypeScript", "Socket.IO"],
       github: "https://github.com",
       demo: "https://chat-app-typescript.onrender.com/",
@@ -129,6 +133,7 @@ export function FeaturedProjectsSection() {
       subtitle: "AI Demo Platform",
       description: "AI-powered demo platform with dynamic content generation capabilities.",
       gradient: "from-warning via-warning/80 to-primary",
+      thumbnail: "/images/Projects/intelli_thumb.png",
       tags: ["React", "Node.js", "OpenAI"],
       github: "https://github.com",
       demo: "https://example.com",
@@ -188,7 +193,15 @@ export function FeaturedProjectsSection() {
             >
               {/* Image / Gradient Header */}
               <div className={`w-full h-36 relative overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <div className="absolute inset-0 bg-black/20 lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
+                <Image 
+                  src={project.thumbnail}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 280px, 320px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
+                  priority
+                />
+                <div className="absolute inset-0 bg-black/40 lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
                     <FaGithub size={18} />
                   </a>
@@ -196,7 +209,6 @@ export function FeaturedProjectsSection() {
                     <ExternalLink size={18} />
                   </a>
                 </div>
-                <span className="text-white/30 text-5xl font-bold group-hover:scale-110 transition-transform duration-500">{project.title.substring(0, 2)}</span>
               </div>
 
               {/* Content */}
