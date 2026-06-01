@@ -79,20 +79,17 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-[4/5] z-10 shadow-2xl group cursor-pointer"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-[4/5] z-10 group cursor-pointer"
           >
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
+            <div className="absolute inset-0 w-full h-full">
               <Image
                 src="/images/hero.png"
                 alt="Cenedy Udoy Palma"
                 fill
                 sizes="(max-width: 768px) 60vw, 26vw"
-                className="object-cover object-top transition-all duration-700 group-hover:scale-105"
+                className="object-cover object-top transition-all duration-700 filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] group-hover:scale-105"
                 priority
               />
-
-              {/* Crisp colored overlay border frame on hover to avoid facial blurring */}
-              <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none border-2 border-primary" />
             </div>
 
             {/* Brutalist Floating Elements */}
