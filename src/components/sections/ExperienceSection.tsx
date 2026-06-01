@@ -202,7 +202,7 @@ export function ExperienceSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 15 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 w-[92vw] sm:w-[85vw] max-w-[800px] aspect-[1.414/1] flex flex-col gap-3"
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 w-[92vw] sm:w-[85vw] max-w-[800px] aspect-[1.414/1]"
             >
               <div className="relative w-full h-full border-2 border-foreground bg-muted/20">
                 <Image 
@@ -213,10 +213,6 @@ export function ExperienceSection() {
                   className="object-contain"
                   priority
                 />
-              </div>
-              <div className="flex justify-between items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-muted-foreground border-t border-foreground/10 pt-2 shrink-0">
-                <span>Verification ID // Interactive Showcase</span>
-                <span className="text-primary font-bold">Cenedy Udoy Palma</span>
               </div>
             </motion.div>
           )}
