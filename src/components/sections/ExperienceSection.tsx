@@ -8,7 +8,7 @@ import Image from "next/image";
 import { GraduationCap, Award, Trophy, Star, Medal, Eye } from "lucide-react";
 
 export function ExperienceSection() {
-  const [hoveredCert, setHoveredCert] = useState<'blockchain' | 'internship' | null>(null);
+  const [hoveredCert, setHoveredCert] = useState<'blockchain' | 'internship' | 'edge' | 'ndub' | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,6 +29,8 @@ export function ExperienceSection() {
       period: "2023 – 2025",
       description: "Conducted ICT training for 5,519+ trainees, 119 companies, developed internal tools and managed project reporting.",
       color: "bg-accent",
+      hasCert: true,
+      certType: "edge",
     },
     {
       role: "Programmer Intern",
@@ -37,6 +39,7 @@ export function ExperienceSection() {
       description: "Worked on enterprise-level backend modules using PHP and Laravel.",
       color: "bg-secondary",
       hasCert: true,
+      certType: "internship",
     },
     {
       role: "Junior Programmer Intern",
@@ -66,11 +69,14 @@ export function ExperienceSection() {
       year: "2022",
       icon: <Trophy className="w-5 h-5 text-warning" />,
       hasCert: true,
+      certType: "blockchain",
     },
     {
       title: "Second Runner-Up – NDUB CSE FEST Programming Contest",
       year: "2021",
       icon: <Medal className="w-5 h-5 text-accent" />,
+      hasCert: true,
+      certType: "ndub",
     },
     {
       title: "Merit-Based Scholarship – Notre Dame University Bangladesh",
@@ -114,7 +120,7 @@ export function ExperienceSection() {
                 
                 {exp.hasCert ? (
                   <p 
-                    onMouseEnter={() => setHoveredCert('internship')}
+                    onMouseEnter={() => setHoveredCert(exp.certType as any)}
                     onMouseLeave={() => setHoveredCert(null)}
                     className="text-sm text-primary font-medium mb-2 hover:text-primary/80 transition-colors cursor-help inline-flex items-center gap-1.5"
                   >
@@ -169,7 +175,7 @@ export function ExperienceSection() {
                   <div>
                     {achievement.hasCert ? (
                       <p 
-                        onMouseEnter={() => setHoveredCert('blockchain')}
+                        onMouseEnter={() => setHoveredCert(achievement.certType as any)}
                         onMouseLeave={() => setHoveredCert(null)}
                         className="text-sm font-semibold text-foreground hover:text-primary transition-colors cursor-help inline-flex items-center gap-2 flex-wrap"
                       >
@@ -202,14 +208,23 @@ export function ExperienceSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 15 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 w-[92vw] sm:w-[85vw] max-w-[800px] aspect-[1.414/1]"
+              className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 ${
+                hoveredCert === 'edge' 
+                  ? "h-[85vh] max-h-[750px] aspect-[1/1.414]" 
+                  : "w-[92vw] sm:w-[85vw] max-w-[800px] aspect-[1.414/1]"
+              }`}
             >
               <div className="relative w-full h-full border-2 border-foreground bg-muted/20">
                 <Image 
-                  src={hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' : '/images/cert-internship.jpg'}
+                  src={
+                    hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' :
+                    hoveredCert === 'internship' ? '/images/cert-internship.jpg' :
+                    hoveredCert === 'edge' ? '/images/cert-edge.jpg' :
+                    '/images/cert-ndub.jpg'
+                  }
                   alt="Certificate Preview"
                   fill
-                  sizes="(max-width: 768px) 92vw, 800px"
+                  sizes={hoveredCert === 'edge' ? "(max-height: 750px) 530px, 85vh" : "(max-width: 768px) 92vw, 800px"}
                   className="object-contain"
                   priority
                 />
