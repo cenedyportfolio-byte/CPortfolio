@@ -5,10 +5,49 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy, Zap } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { 
+  FaGithub, 
+  FaLinkedin, 
+  FaXTwitter,
+  FaPhp,
+  FaPython,
+  FaAws,
+  FaAndroid,
+  FaLaravel,
+  FaNodeJs,
+  FaReact,
+  FaDocker
+} from "react-icons/fa6";
+import { 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiMongodb, 
+  SiPostgresql, 
+  SiMysql, 
+  SiTailwindcss,
+  SiJavascript
+} from "react-icons/si";
 
 export function HeroSection() {
   const [isHovered, setIsHovered] = useState(false);
+
+  const techItems = [
+    { name: "PHP", icon: <FaPhp className="w-5 h-5 text-[#777BB4]" /> },
+    { name: "Laravel", icon: <FaLaravel className="w-5 h-5 text-[#FF2D20]" /> },
+    { name: "Python", icon: <FaPython className="w-5 h-5 text-[#3776AB]" /> },
+    { name: "AWS", icon: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
+    { name: "Android", icon: <FaAndroid className="w-5 h-5 text-[#3DDC84]" /> },
+    { name: "React", icon: <FaReact className="w-5 h-5 text-[#61DAFB]" /> },
+    { name: "Next.js", icon: <SiNextdotjs className="w-5 h-5 text-foreground" /> },
+    { name: "Node.js", icon: <FaNodeJs className="w-5 h-5 text-[#339933]" /> },
+    { name: "TypeScript", icon: <SiTypescript className="w-5 h-5 text-[#3178C6]" /> },
+    { name: "JavaScript", icon: <SiJavascript className="w-5 h-5 text-[#F7DF1E]" /> },
+    { name: "Docker", icon: <FaDocker className="w-5 h-5 text-[#2496ED]" /> },
+    { name: "MongoDB", icon: <SiMongodb className="w-5 h-5 text-[#47A248]" /> },
+    { name: "MySQL", icon: <SiMysql className="w-5 h-5 text-[#4479A1]" /> },
+    { name: "PostgreSQL", icon: <SiPostgresql className="w-5 h-5 text-[#4169E1]" /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss className="w-5 h-5 text-[#06B6D4]" /> },
+  ];
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
@@ -166,6 +205,19 @@ export function HeroSection() {
           </div>
         </div>
       </motion.div>
+
+      {/* Infinite Tech Sliding Marquee */}
+      <div className="w-full border-b border-foreground/10 bg-muted/5 py-4 overflow-hidden relative z-40 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-24 before:bg-gradient-to-r before:from-background before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-24 after:bg-gradient-to-l after:from-background after:to-transparent mt-4">
+        <div className="flex w-max gap-8 animate-infinite-slide">
+          {/* Tripled list for a perfectly seamless sliding animation loop */}
+          {[...techItems, ...techItems, ...techItems].map((tech, idx) => (
+            <div key={idx} className="flex items-center gap-2 bg-background border border-border px-3.5 py-2 rounded-lg shadow-sm hover:border-primary/50 transition-all duration-300">
+              <div className="shrink-0">{tech.icon}</div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-foreground">{tech.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

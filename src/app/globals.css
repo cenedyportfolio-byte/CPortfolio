@@ -127,3 +127,17 @@
 .scrollbar-none::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
 }
+
+/* Infinite Horizontal Slider Keyframes */
+@keyframes infinite-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-slide {
+  animation: infinite-slide 25s linear infinite;
+}
