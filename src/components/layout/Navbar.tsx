@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Download, ChevronDown } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/ui/Logo";
@@ -11,7 +11,6 @@ import { Logo } from "@/components/ui/Logo";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
   const [activeCv, setActiveCv] = useState<{ title: string; url: string; filename: string } | null>(null);
 
   useEffect(() => {
@@ -79,74 +78,19 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop CTA Button with Dropdown */}
-          <div className="hidden lg:flex items-center relative">
+          {/* Desktop CTA Button */}
+          <div className="hidden lg:flex items-center">
             <button
-              onClick={() => setCvDropdownOpen(!cvDropdownOpen)}
-              onBlur={() => setTimeout(() => setCvDropdownOpen(false), 200)}
+              onClick={() => setActiveCv({
+                title: "Software Engineer CV",
+                url: "/CV/Cenedy Udoy Palma.pdf",
+                filename: "Cenedy Udoy Palma.pdf"
+              })}
               className={`${buttonVariants({ size: "sm" })} rounded-full px-5 gap-2 shadow-md shadow-primary/20 flex items-center font-bold`}
             >
               <Download className="w-4 h-4" />
               Download CV
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${cvDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
-            <AnimatePresence>
-              {cvDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-card border-2 border-foreground rounded-xl shadow-[4px_4px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_rgba(255,255,255,0.15)] py-2 z-50 text-left select-none"
-                >
-                  <a
-                    href="/CV/Cenedy Udoy Palma.pdf"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveCv({
-                        title: "Software Engineer CV (General)",
-                        url: "/CV/Cenedy Udoy Palma.pdf",
-                        filename: "Cenedy Udoy Palma.pdf"
-                      });
-                      setCvDropdownOpen(false);
-                    }}
-                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50 cursor-pointer"
-                  >
-                    💼 Software Engineer CV (General)
-                  </a>
-                  <a
-                    href="/CV/it_industry.pdf"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveCv({
-                        title: "IT Industry CV",
-                        url: "/CV/it_industry.pdf",
-                        filename: "Cenedy Udoy Palma - IT Industry CV.pdf"
-                      });
-                      setCvDropdownOpen(false);
-                    }}
-                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors border-b border-border/50 cursor-pointer"
-                  >
-                    🛠️ IT Industry CV
-                  </a>
-                  <a
-                    href="/CV/Candy_letex_cv_For_US_salimsazzed.pdf"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveCv({
-                        title: "US Format CV",
-                        url: "/CV/Candy_letex_cv_For_US_salimsazzed.pdf",
-                        filename: "Cenedy Udoy Palma - US Format CV.pdf"
-                      });
-                      setCvDropdownOpen(false);
-                    }}
-                    className="block px-4 py-2 text-xs font-black text-foreground hover:bg-muted hover:text-primary transition-colors cursor-pointer"
-                  >
-                    🌐 US Format CV
-                  </a>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -174,52 +118,19 @@ export function Navbar() {
             </Link>
           ))}
           <div className="border-t border-border/30 mt-3 pt-3 flex flex-col gap-2">
-            <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-3 mb-1">Download CV Options:</p>
-            <a
-              href="/CV/Cenedy Udoy Palma.pdf"
-              onClick={(e) => {
-                e.preventDefault();
+            <button
+              onClick={() => {
                 setActiveCv({
-                  title: "Software Engineer CV (General)",
+                  title: "Software Engineer CV",
                   url: "/CV/Cenedy Udoy Palma.pdf",
                   filename: "Cenedy Udoy Palma.pdf"
                 });
                 setMobileMenuOpen(false);
               }}
-              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors cursor-pointer"
+              className="flex items-center justify-center gap-2 text-sm font-black bg-primary text-white py-3 px-4 rounded-xl border-2 border-foreground shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:-translate-y-px hover:-translate-x-px hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
             >
-              💼 Software Engineer CV (General)
-            </a>
-            <a
-              href="/CV/it_industry.pdf"
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveCv({
-                  title: "IT Industry CV",
-                  url: "/CV/it_industry.pdf",
-                  filename: "Cenedy Udoy Palma - IT Industry CV.pdf"
-                });
-                setMobileMenuOpen(false);
-              }}
-              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors cursor-pointer"
-            >
-              🛠️ IT Industry CV
-            </a>
-            <a
-              href="/CV/Candy_letex_cv_For_US_salimsazzed.pdf"
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveCv({
-                  title: "US Format CV",
-                  url: "/CV/Candy_letex_cv_For_US_salimsazzed.pdf",
-                  filename: "Cenedy Udoy Palma - US Format CV.pdf"
-                });
-                setMobileMenuOpen(false);
-              }}
-              className="flex items-center gap-2 text-sm font-bold text-foreground py-2 px-3 rounded-lg hover:bg-muted transition-colors cursor-pointer"
-            >
-              🌐 US Format CV
-            </a>
+              <Download className="w-4 h-4" /> Download CV
+            </button>
           </div>
         </nav>
       )}
