@@ -40,8 +40,8 @@ export default function Home() {
         "System Architecture"
       ],
       "sameAs": [
-        "https://github.com",
-        "https://linkedin.com",
+        "https://github.com/cenedypalma",
+        "https://www.linkedin.com/in/cenedy-palma-9560a7253/",
         "https://x.com"
       ]
     }

@@ -95,7 +95,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-primary via-primary/80 to-secondary",
       thumbnail: "/images/Projects/savior_thumb.png",
       tags: ["Flutter", "Firebase", "Alan AI", "Dart"],
-      github: "https://github.com",
+      github: "https://github.com/cenedypalma",
       demo: "https://example.com",
     },
     {
@@ -105,7 +105,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-accent via-accent/80 to-success",
       thumbnail: "/images/Projects/pokemon_thumb.png",
       tags: ["Node.js", "React", "MongoDB"],
-      github: "https://github.com",
+      github: "https://github.com/cenedypalma",
       demo: "https://pokemon-cards-rouge.vercel.app/",
     },
     {
@@ -115,7 +115,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-secondary via-secondary/80 to-accent",
       thumbnail: "/images/Projects/lce_thumb.png",
       tags: ["Laravel", "React", "MySQL"],
-      github: "https://github.com",
+      github: "https://github.com/cenedypalma",
       demo: "https://laundry-care-express.vercel.app/",
     },
     {
@@ -125,7 +125,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-success via-success/80 to-primary",
       thumbnail: "/images/Projects/chat_thumb.png",
       tags: ["Node.js", "TypeScript", "Socket.IO"],
-      github: "https://github.com",
+      github: "https://github.com/cenedypalma",
       demo: "https://chat-app-typescript.onrender.com/",
     },
     {
@@ -135,7 +135,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-warning via-warning/80 to-primary",
       thumbnail: "/images/Projects/intelli_thumb.png",
       tags: ["React", "Node.js", "OpenAI"],
-      github: "https://github.com",
+      github: "https://github.com/cenedypalma",
       demo: "https://example.com",
     },
   ];

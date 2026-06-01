@@ -19,10 +19,10 @@ export function Footer() {
 
         {/* Social Links */}
         <div className="flex items-center gap-3">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="GitHub">
+          <a href="https://github.com/cenedypalma" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="GitHub">
             <FaGithub size={18} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/cenedy-palma-9560a7253/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="LinkedIn">
             <FaLinkedin size={18} />
           </a>
           <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="X/Twitter">
