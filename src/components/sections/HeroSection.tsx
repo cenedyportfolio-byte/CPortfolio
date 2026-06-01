@@ -87,7 +87,7 @@ export function HeroSection() {
                 alt="Cenedy Udoy Palma"
                 fill
                 sizes="(max-width: 768px) 60vw, 26vw"
-                className="object-cover object-top transition-all duration-700 filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] group-hover:scale-105"
+                className="object-cover object-top filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)]"
                 priority
               />
             </div>
