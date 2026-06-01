@@ -194,36 +194,34 @@ export function ExperienceSection() {
       </div>
 
       {/* Dynamic Centered Certificate Overlay Preview via Portal */}
-      {mounted && typeof document !== "undefined" && (
+      {mounted && typeof document !== "undefined" && createPortal(
         <AnimatePresence>
-          {hoveredCert && createPortal(
-            <div className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none bg-black/40 backdrop-blur-sm">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 15 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 w-[92vw] sm:w-[85vw] max-w-[850px] aspect-[1.414/1] flex flex-col gap-3 pointer-events-none"
-              >
-                <div className="relative w-full h-full border-2 border-foreground bg-muted/20">
-                  <Image 
-                    src={hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' : '/images/cert-internship.jpg'}
-                    alt="Certificate Preview"
-                    fill
-                    sizes="(max-width: 768px) 92vw, 850px"
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-                <div className="flex justify-between items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-muted-foreground border-t border-foreground/10 pt-2 shrink-0">
-                  <span>Verification ID // Interactive Showcase</span>
-                  <span className="text-primary font-bold">Cenedy Udoy Palma</span>
-                </div>
-              </motion.div>
-            </div>,
-            document.body
+          {hoveredCert && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 15 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] pointer-events-none bg-card border-4 border-foreground shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.15)] p-4 w-[92vw] sm:w-[85vw] max-w-[800px] aspect-[1.414/1] flex flex-col gap-3"
+            >
+              <div className="relative w-full h-full border-2 border-foreground bg-muted/20">
+                <Image 
+                  src={hoveredCert === 'blockchain' ? '/images/cert-blockchain.jpg' : '/images/cert-internship.jpg'}
+                  alt="Certificate Preview"
+                  fill
+                  sizes="(max-width: 768px) 92vw, 800px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="flex justify-between items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-muted-foreground border-t border-foreground/10 pt-2 shrink-0">
+                <span>Verification ID // Interactive Showcase</span>
+                <span className="text-primary font-bold">Cenedy Udoy Palma</span>
+              </div>
+            </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
       )}
     </SectionWrapper>
   );
