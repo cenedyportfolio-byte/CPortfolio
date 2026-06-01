@@ -24,7 +24,7 @@ export function HeroSection() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
         >
-          <h1 className={`text-[clamp(2.2rem,14.5vw,10.8rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-500 ${isHovered ? 'z-30 scale-105' : 'z-0'}`}>
+          <h1 className={`text-[clamp(2.8rem,19.5vw,15.5rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-500 ${isHovered ? 'z-30 scale-105' : 'z-0'}`}>
             <span className="block bg-gradient-to-r from-foreground via-foreground/90 to-primary bg-clip-text text-transparent dark:from-white dark:via-white/90 dark:to-indigo-300">
               CENEDY
             </span>
