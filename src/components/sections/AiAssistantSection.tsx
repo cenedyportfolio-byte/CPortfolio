@@ -37,14 +37,19 @@ export function AiAssistantSection() {
 
   useEffect(() => {
     if (messages.length > 0) {
-      if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTo({
-          top: chatContainerRef.current.scrollHeight,
-          behavior: 'smooth'
-        });
+      const container = chatContainerRef.current;
+      if (container) {
+        const behavior = isLoading ? "auto" : "smooth";
+        const timeoutId = setTimeout(() => {
+          container.scrollTo({
+            top: container.scrollHeight,
+            behavior: behavior
+          });
+        }, 30);
+        return () => clearTimeout(timeoutId);
       }
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const suggestions = [
     "What are Cenedy's top skills?",
