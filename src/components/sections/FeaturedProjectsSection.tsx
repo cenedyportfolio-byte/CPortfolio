@@ -12,11 +12,25 @@ import Image from "next/image";
 export function FeaturedProjectsSection() {
   const [mounted, setMounted] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<'pokemon' | null>(null);
+  const [isOverCard, setIsOverCard] = useState(false);
+  const [isOverMockup, setIsOverMockup] = useState(false);
   const [windowBlurred, setWindowBlurred] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Debounced/delayed state updater to bridge gap between leaving card and entering mockup without flickering
+  useEffect(() => {
+    if (isOverCard || isOverMockup) {
+      setHoveredProject('pokemon');
+    } else {
+      const timer = setTimeout(() => {
+        setHoveredProject(null);
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [isOverCard, isOverMockup]);
 
   useEffect(() => {
     const handleBlur = () => {
@@ -88,7 +102,7 @@ export function FeaturedProjectsSection() {
       gradient: "from-accent via-accent/80 to-success",
       tags: ["Node.js", "React", "MongoDB"],
       github: "https://github.com",
-      demo: "https://example.com",
+      demo: "https://pokemon-cards-rouge.vercel.app/",
     },
     {
       title: "LCE Backend System",
@@ -148,27 +162,27 @@ export function FeaturedProjectsSection() {
               className="w-[280px] sm:w-[320px] shrink-0 group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px] cursor-help"
               onMouseEnter={() => {
                 if (project.title === "Pokemon Trading Platform") {
-                  setHoveredProject('pokemon');
+                  setIsOverCard(true);
                 }
               }}
               onMouseLeave={() => {
                 if (project.title === "Pokemon Trading Platform") {
-                  setHoveredProject(null);
+                  setIsOverCard(false);
                 }
               }}
               onClick={() => {
                 if (project.title === "Pokemon Trading Platform") {
-                  setHoveredProject(prev => prev === 'pokemon' ? null : 'pokemon');
+                  setIsOverCard(prev => !prev);
                 }
               }}
             >
               {/* Image / Gradient Header */}
               <div className={`w-full h-36 relative overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
                 <div className="absolute inset-0 bg-black/20 lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
                     <FaGithub size={18} />
                   </a>
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors">
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
                     <ExternalLink size={18} />
                   </a>
                 </div>
@@ -216,7 +230,11 @@ export function FeaturedProjectsSection() {
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
               className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm pointer-events-auto md:bg-transparent md:backdrop-blur-none md:pointer-events-none print:hidden select-none"
-              onClick={() => setHoveredProject(null)}
+              onClick={() => {
+                setIsOverCard(false);
+                setIsOverMockup(false);
+                setHoveredProject(null);
+              }}
             >
               <div 
                 className="relative w-full h-full flex items-center justify-center md:justify-start max-w-[850px] p-4"
@@ -224,10 +242,15 @@ export function FeaturedProjectsSection() {
               >
                 
                 {/* Desktop Mockup Browser Frame */}
-                <div 
-                  className={`relative w-[78%] aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 hidden md:flex ${
+                <a 
+                  href="https://pokemon-cards-rouge.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`relative w-[78%] aspect-[16/10] bg-white dark:bg-card border-4 border-foreground rounded-2xl shadow-[20px_20px_0px_rgba(0,0,0,1)] dark:shadow-[20px_20px_0px_rgba(255,255,255,0.15)] flex flex-col overflow-hidden transition-all duration-300 hidden md:flex pointer-events-auto cursor-pointer hover:scale-[1.01] hover:shadow-[24px_24px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 transition-transform duration-200 ${
                     windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
                   }`}
+                  onMouseEnter={() => setIsOverMockup(true)}
+                  onMouseLeave={() => setIsOverMockup(false)}
                 >
                   {/* Browser Top bar */}
                   <div className="h-10 border-b-2 border-foreground bg-muted/30 px-4 flex items-center justify-between shrink-0 select-none">
@@ -237,7 +260,7 @@ export function FeaturedProjectsSection() {
                       <div className="w-3 h-3 rounded-full bg-green-500 border border-foreground" />
                     </div>
                     <div className="w-1/2 h-6 rounded-md border border-foreground bg-background px-3 flex items-center text-[10px] text-muted-foreground tracking-wide font-mono">
-                      pokepixels.vercel.app
+                      pokemon-cards-rouge.vercel.app
                     </div>
                     <div className="w-6" /> {/* spacer */}
                   </div>
@@ -254,13 +277,18 @@ export function FeaturedProjectsSection() {
                       onDragStart={(e) => e.preventDefault()}
                     />
                   </div>
-                </div>
+                </a>
 
                 {/* Mobile Mockup Phone Frame */}
-                <div 
-                  className={`bg-white dark:bg-card border-4 border-foreground rounded-[28px] shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.15)] z-20 flex flex-col overflow-hidden transition-all duration-300 ${
+                <a 
+                  href="https://pokemon-cards-rouge.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`bg-white dark:bg-card border-4 border-foreground rounded-[28px] shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.15)] z-20 flex flex-col overflow-hidden transition-all duration-300 pointer-events-auto cursor-pointer hover:scale-[1.03] hover:-translate-y-1.5 active:translate-y-0 transition-transform duration-200 ${
                     windowBlurred ? "blur-[30px] scale-95 opacity-20" : ""
                   } md:absolute md:right-0 md:bottom-6 md:w-[25%] md:aspect-[9/19] w-[70vw] max-w-[280px] aspect-[9/19]`}
+                  onMouseEnter={() => setIsOverMockup(true)}
+                  onMouseLeave={() => setIsOverMockup(false)}
                 >
                   {/* Mobile Screen Notch */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-3 bg-foreground rounded-full z-30 flex items-center justify-center">
@@ -280,7 +308,7 @@ export function FeaturedProjectsSection() {
                       onDragStart={(e) => e.preventDefault()}
                     />
                   </div>
-                </div>
+                </a>
 
                 {/* Security Watermarks */}
                 {!windowBlurred && (
