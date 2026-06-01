@@ -79,7 +79,7 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-[4/5] z-10 group cursor-pointer"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-square z-10 group cursor-pointer"
           >
             <div className="absolute inset-0 w-full h-full">
               <Image
@@ -87,7 +87,7 @@ export function HeroSection() {
                 alt="Cenedy Udoy Palma"
                 fill
                 sizes="(max-width: 768px) 60vw, 26vw"
-                className="object-cover object-top filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)]"
+                className="object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)]"
                 priority
               />
             </div>
