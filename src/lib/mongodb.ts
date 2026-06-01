@@ -31,11 +31,25 @@ async function connectToDatabase() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    const promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       return mongoose;
     });
+    
+    // Prevent unhandled promise rejection errors in Next.js
+    promise.catch((err) => {
+       console.error("MongoDB Connection Error:", err.message);
+    });
+    
+    cached.promise = promise;
   }
-  cached.conn = await cached.promise;
+  
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+  
   return cached.conn;
 }
 
