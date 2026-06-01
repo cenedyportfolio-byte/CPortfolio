@@ -141,3 +141,7 @@
 .animate-infinite-slide {
   animation: infinite-slide 25s linear infinite;
 }
+
+.animate-infinite-slide-slow {
+  animation: infinite-slide 45s linear infinite;
+}

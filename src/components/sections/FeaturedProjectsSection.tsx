@@ -71,11 +71,13 @@ export function FeaturedProjectsSection() {
         </a>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-        {projects.map((project, index) => (
-          <motion.div key={project.title} variants={motionItem} custom={index}>
-            <div className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col">
-              
+      <motion.div variants={motionItem} className="w-full overflow-hidden relative before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-24 before:bg-gradient-to-r before:from-background before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-24 after:bg-gradient-to-l after:from-background after:to-transparent py-6">
+        <div className="flex w-max gap-6 animate-infinite-slide-slow hover:[animation-play-state:paused]">
+          {[...projects, ...projects, ...projects].map((project, index) => (
+            <div 
+              key={index} 
+              className="w-[280px] sm:w-[320px] shrink-0 group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px]"
+            >
               {/* Image / Gradient Header */}
               <div className={`w-full h-36 relative overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
                 <div className="absolute inset-0 bg-black/20 lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
@@ -90,15 +92,17 @@ export function FeaturedProjectsSection() {
               </div>
 
               {/* Content */}
-              <div className="p-5 flex-1 flex flex-col">
-                <h3 className="text-base font-bold text-foreground mb-0.5 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-xs text-primary font-medium mb-2">{project.subtitle}</p>
-                <p className="text-xs text-muted-foreground mb-4 flex-1 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-base font-bold text-foreground mb-0.5 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs text-primary font-medium mb-2">{project.subtitle}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-4">
                   {project.tags.map(tag => (
                     <Badge key={tag} variant="secondary" className="text-[10px] px-2 py-0.5 bg-muted text-muted-foreground border-none">
                       {tag}
@@ -107,9 +111,9 @@ export function FeaturedProjectsSection() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </motion.div>
     </SectionWrapper>
   );
 }
