@@ -107,11 +107,13 @@ export function ExperienceSection() {
       degree: "Master of Information Technology (MIT)",
       institution: "Institute of Information Technology, University of Dhaka",
       period: "2023 – 2025",
+      logo: "/images/dhaka_university_logo.png",
     },
     {
       degree: "BSc in Computer Science & Engineering",
       institution: "Notre Dame University Bangladesh",
       period: "2018 – 2022",
+      logo: "/images/ndub_logo.png",
     },
   ];
 
@@ -203,10 +205,23 @@ export function ExperienceSection() {
             </div>
             <div className="space-y-5">
               {education.map((edu, index) => (
-                <div key={index} className="bg-white rounded-2xl border border-border p-5 hover:shadow-md transition-shadow">
-                  <h3 className="text-base font-bold text-foreground mb-1">{edu.degree}</h3>
-                  <p className="text-sm text-muted-foreground mb-1">{edu.institution}</p>
-                  <span className="text-xs text-primary font-medium">{edu.period}</span>
+                <div key={index} className="bg-white rounded-2xl border border-border p-5 hover:shadow-md transition-shadow flex items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-base font-bold text-foreground mb-1">{edu.degree}</h3>
+                    <p className="text-sm text-muted-foreground mb-1">{edu.institution}</p>
+                    <span className="text-xs text-primary font-medium">{edu.period}</span>
+                  </div>
+                  {edu.logo && (
+                    <div className="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden border border-border bg-white flex items-center justify-center p-1 shadow-sm">
+                      <Image
+                        src={edu.logo}
+                        alt={`${edu.institution} Logo`}
+                        fill
+                        sizes="64px"
+                        className="object-contain p-1"
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
