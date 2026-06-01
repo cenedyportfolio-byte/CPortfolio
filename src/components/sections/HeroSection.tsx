@@ -87,12 +87,12 @@ export function HeroSection() {
                 alt="Cenedy Udoy Palma"
                 fill
                 sizes="(max-width: 768px) 60vw, 26vw"
-                className="object-cover object-top transition-all duration-700"
+                className="object-cover object-top transition-all duration-700 group-hover:scale-105"
                 priority
               />
 
-              {/* Blue Glass Overlay */}
-              <div className="absolute inset-0 bg-blue-500/25 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none border border-white/20" />
+              {/* Crisp colored overlay border frame on hover to avoid facial blurring */}
+              <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none border-2 border-primary" />
             </div>
 
             {/* Brutalist Floating Elements */}
