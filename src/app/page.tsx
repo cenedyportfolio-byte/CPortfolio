@@ -42,7 +42,7 @@ export default function Home() {
       "sameAs": [
         "https://github.com/cenedypalma",
         "https://www.linkedin.com/in/cenedy-palma-9560a7253/",
-        "https://x.com"
+        "https://x.com/cenedypalma"
       ]
     }
   };

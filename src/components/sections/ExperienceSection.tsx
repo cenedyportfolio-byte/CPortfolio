@@ -154,7 +154,7 @@ export function ExperienceSection() {
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
               Experience
             </h2>
-            <a href="#" className="text-primary text-sm font-medium hover:underline flex items-center gap-1">
+            <a href="https://www.linkedin.com/in/cenedy-palma-9560a7253/" target="_blank" rel="noopener noreferrer" className="text-primary text-sm font-medium hover:underline flex items-center gap-1">
               View Full Experience →
             </a>
           </div>

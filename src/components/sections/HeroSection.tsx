@@ -167,7 +167,7 @@ export function HeroSection() {
               <a href="https://www.linkedin.com/in/cenedy-palma-9560a7253/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors duration-300" aria-label="LinkedIn">
                 <FaLinkedin size={24} />
               </a>
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors duration-300" aria-label="X/Twitter">
+              <a href="https://x.com/cenedypalma" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors duration-300" aria-label="X/Twitter">
                 <FaXTwitter size={24} />
               </a>
             </div>

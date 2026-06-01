@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+
 import { Menu, X, Download } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,15 +59,7 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border bg-muted flex items-center justify-center shrink-0">
-              <Image
-                src="/images/hero.png"
-                alt="Cenedy Palma Logo"
-                fill
-                sizes="36px"
-                className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-300"
-              />
-            </div>
+            <Logo size={36} />
             <span className="text-lg font-bold text-foreground">Cenedy Palma</span>
           </Link>
 

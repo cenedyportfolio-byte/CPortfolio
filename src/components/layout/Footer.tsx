@@ -24,7 +24,7 @@ export function Footer() {
           <a href="https://www.linkedin.com/in/cenedy-palma-9560a7253/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="LinkedIn">
             <FaLinkedin size={18} />
           </a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="X/Twitter">
+          <a href="https://x.com/cenedypalma" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="X/Twitter">
             <FaXTwitter size={18} />
           </a>
           <a href="mailto:cenedypalma@gmail.com" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors" aria-label="Email">
