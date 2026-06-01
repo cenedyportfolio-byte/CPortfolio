@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy } from "lucide-react";
@@ -9,146 +8,151 @@ import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export function HeroSection() {
   return (
-    <section className="relative pt-28 pb-0 md:pt-36 overflow-hidden bg-background">
-      {/* Subtle background gradients — GPU-optimized with will-change */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[80px] rounded-full pointer-events-none will-change-transform" />
-      <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-accent/5 blur-[60px] rounded-full pointer-events-none will-change-transform" />
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
+      {/* Brutalist Background Elements */}
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-primary/5 blur-[120px] rounded-none pointer-events-none will-change-transform" />
+      <div className="absolute bottom-0 left-0 w-[40vw] h-[40vh] bg-accent/5 blur-[100px] rounded-none pointer-events-none will-change-transform" />
 
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center">
+      <div className="container mx-auto px-4 md:px-8 max-w-[1400px] relative z-10 flex-1 flex flex-col justify-center">
+        
+        {/* Massive Typographic Hero */}
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
+        >
+          <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] font-black tracking-tighter text-foreground uppercase relative z-20 pointer-events-none select-none text-center drop-shadow-xl">
+            CENEDY<br />PALMA
+          </h1>
           
-          {/* Left — Text Content */}
+          {/* Overlapping Hero Image Fragment */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="order-2 lg:order-1"
+            initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-1/2 left-1/2 transform -translate-x-[40%] -translate-y-1/2 w-[55vw] md:w-[24vw] max-w-[340px] aspect-[3/4] z-10 shadow-2xl"
           >
-            <p className="text-lg text-muted-foreground mb-2">{"Hi, I'm"}</p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-4">
-              Cenedy Udoy<br />Palma
-            </h1>
-            <p className="text-xl md:text-2xl font-semibold text-foreground/80 mb-5">
-              Software Engineer &{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                Product Builder
-              </span>
-            </p>
-            <p className="text-base text-muted-foreground mb-8 max-w-lg leading-relaxed">
-              I build scalable backend systems and seamlessly integrate AI into high-performance SaaS applications.
-            </p>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40 mix-blend-multiply dark:mix-blend-color-dodge transition-opacity duration-500 hover:opacity-0 z-20" />
+            <div className="absolute inset-0 border-[1px] border-foreground/20 z-30 pointer-events-none" />
+            <Image
+              src="/images/hero.png"
+              alt="Cenedy Udoy Palma"
+              fill
+              sizes="(max-width: 768px) 60vw, 26vw"
+              className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+              priority
+            />
 
-            {/* Buttons */}
-            <div className="flex flex-wrap items-center gap-3 mb-8">
+            {/* Brutalist Floating Elements */}
+            <motion.div
+              initial={{ opacity: 0, x: -30, y: -20 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8, type: "spring", stiffness: 150 }}
+              className="absolute -top-6 -left-6 w-20 h-20 bg-foreground text-background flex items-center justify-center text-3xl font-mono font-black shadow-2xl z-40 hover:rotate-12 transition-transform duration-300"
+            >
+              {"</>"}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30, y: 20 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0, type: "spring", stiffness: 120 }}
+              className="absolute -bottom-8 -right-8 bg-background border border-foreground px-6 py-4 shadow-[8px_8px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,1)] z-40 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_rgba(255,255,255,1)] transition-all duration-300"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">⚡</span>
+                <div>
+                  <p className="text-sm font-black text-foreground uppercase tracking-widest">Problem Solver</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">By Architecture</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Asymmetric Bottom Content */}
+        <div className="pt-10 pb-8 w-full flex flex-col md:flex-row justify-between items-end gap-10 relative z-30">
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="max-w-xl w-full"
+          >
+            <div className="border-l-4 border-primary pl-6">
+              <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-3">
+                Software Engineer <span className="text-primary">X</span> Product Builder
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed max-w-md">
+                I build scalable backend systems and seamlessly integrate AI into high-performance SaaS applications. No templates. No safe harbors. Pure engineering.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-col items-start md:items-end gap-6 w-full md:w-auto"
+          >
+            <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="#projects"
-                className={`${buttonVariants({ size: "lg" })} rounded-full h-12 px-7 text-base shadow-lg shadow-primary/20 gap-2`}
+                className="bg-foreground text-background font-bold uppercase tracking-wider text-sm px-8 py-4 border border-transparent hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 flex items-center gap-2"
               >
                 View My Work <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="#contact"
-                className={`${buttonVariants({ size: "lg", variant: "outline" })} rounded-full h-12 px-7 text-base gap-2`}
+                className="bg-background text-foreground font-bold uppercase tracking-wider text-sm px-8 py-4 border border-foreground hover:bg-foreground hover:text-background transition-all duration-300 flex items-center gap-2"
               >
-                Contact Me <Mail className="w-4 h-4" />
+                Contact <Mail className="w-4 h-4" />
               </Link>
             </div>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all duration-300" aria-label="GitHub">
-                <FaGithub size={20} />
+            <div className="flex items-center gap-5">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors duration-300" aria-label="GitHub">
+                <FaGithub size={24} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all duration-300" aria-label="LinkedIn">
-                <FaLinkedin size={20} />
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors duration-300" aria-label="LinkedIn">
+                <FaLinkedin size={24} />
               </a>
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all duration-300" aria-label="X/Twitter">
-                <FaXTwitter size={20} />
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors duration-300" aria-label="X/Twitter">
+                <FaXTwitter size={24} />
               </a>
-              <a href="mailto:cenedypalma@gmail.com" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all duration-300" aria-label="Email">
-                <Mail size={18} />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Right — Hero Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
-          >
-            <div className="relative w-[320px] h-[380px] md:w-[400px] md:h-[480px]">
-              {/* Photo container with gradient background */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary via-primary/80 to-accent overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/hero.png"
-                  alt="Cenedy Udoy Palma — Full Stack Developer and Product Builder"
-                  fill
-                  sizes="(max-width: 768px) 320px, 400px"
-                  className="object-cover object-top"
-                  priority
-                />
-              </div>
-
-              {/* Floating Code Icon — one-time entrance, then gentle CSS hover */}
-              <motion.div
-                initial={{ opacity: 0, y: -20, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.8, type: "spring", stiffness: 200 }}
-                className="absolute -top-4 -right-4 w-16 h-16 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl font-mono font-bold shadow-xl z-10 hover:scale-110 transition-transform duration-300"
-              >
-                {"</>"}
-              </motion.div>
-
-              {/* Floating "Problem Solver" Card — one-time entrance */}
-              <motion.div
-                initial={{ opacity: 0, x: 20, scale: 0.9 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.0, type: "spring", stiffness: 180 }}
-                className="absolute -bottom-3 -right-6 glass rounded-2xl px-5 py-3 shadow-xl z-10 flex items-center gap-2 hover:scale-105 transition-transform duration-300"
-              >
-                <span className="text-lg">🧩</span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Problem Solver</p>
-                  <p className="text-xs text-muted-foreground">by Nature</p>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         </div>
 
-        {/* Stats Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 mb-8 grid grid-cols-2 md:grid-cols-4 gap-4"
-        >
-          {[
-            { value: "4+", label: "Years Experience", icon: <Briefcase className="w-5 h-5" />, color: "bg-primary/10 text-primary" },
-            { value: "10+", label: "Projects Delivered", icon: <FolderGit className="w-5 h-5" />, color: "bg-accent/10 text-accent" },
-            { value: "5+", label: "Technologies Mastered", icon: <Cpu className="w-5 h-5" />, color: "bg-secondary/10 text-secondary" },
-            { value: "∞", label: "Problems Solved", icon: <Trophy className="w-5 h-5" />, color: "bg-success/10 text-success" },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-              className="bg-white rounded-2xl border border-border p-5 flex items-center gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${stat.color}`}>
-                {stat.icon}
-              </div>
-              <div>
-                <p className="text-2xl font-extrabold text-foreground leading-none mb-1">{stat.value}</p>
-                <p className="text-xs text-muted-foreground font-medium">{stat.label}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
+
+      {/* Brutalist Stats Marquee/Bar at absolute bottom */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="w-full border-y border-foreground/10 bg-muted/30 backdrop-blur-sm py-4 relative z-40 overflow-hidden"
+      >
+        <div className="container mx-auto px-4 max-w-[1400px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x divide-foreground/10">
+            {[
+              { value: "04+", label: "Years Experience", icon: <Briefcase className="w-4 h-4" /> },
+              { value: "10+", label: "Projects Delivered", icon: <FolderGit className="w-4 h-4" /> },
+              { value: "05+", label: "Core Technologies", icon: <Cpu className="w-4 h-4" /> },
+              { value: "∞", label: "Problems Solved", icon: <Trophy className="w-4 h-4" /> },
+            ].map((stat, index) => (
+              <div key={stat.label} className={`flex items-center gap-4 ${index !== 0 ? 'pl-4 md:pl-8' : ''}`}>
+                <div className="text-primary hidden sm:block">{stat.icon}</div>
+                <div>
+                  <p className="text-xl md:text-2xl font-black text-foreground font-mono leading-none">{stat.value}</p>
+                  <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-widest font-bold mt-1">{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

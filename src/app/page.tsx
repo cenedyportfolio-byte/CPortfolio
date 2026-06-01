@@ -2,11 +2,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { ProcessSection } from "@/components/sections/ProcessSection";
+import { ProblemSolverSection } from "@/components/sections/ProblemSolverSection";
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { TechStackSection } from "@/components/sections/TechStackSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { AiAssistantSection } from "@/components/sections/AiAssistantSection";
+import { ProblemSolverLab } from "@/components/sections/ProblemSolverLab";
+import { CommunityLeaderboard } from "@/components/sections/CommunityLeaderboard";
 
 export default function Home() {
   const jsonLd = {
@@ -58,8 +61,11 @@ export default function Home() {
       
       <main id="main-content">
         <HeroSection />
+        <CommunityLeaderboard />
+        <AiAssistantSection />
         <AboutSection />
-        <ProcessSection />
+        <ProblemSolverLab />
+        <ProblemSolverSection />
         <FeaturedProjectsSection />
         <TechStackSection />
         <ExperienceSection />

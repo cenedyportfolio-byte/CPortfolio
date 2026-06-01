@@ -11,7 +11,7 @@ interface SectionWrapperProps {
 
 export function SectionWrapper({ children, id, className = "" }: SectionWrapperProps) {
   return (
-    <section id={id} className={`py-24 ${className}`}>
+    <section id={id} className={`py-16 md:py-20 ${className}`}>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -27,7 +27,7 @@ export function SectionWrapper({ children, id, className = "" }: SectionWrapperP
             },
           },
         }}
-        className="container mx-auto px-4 md:px-8 max-w-7xl"
+        className="container mx-auto px-4 md:px-8 max-w-[1536px]"
       >
         {children}
       </motion.div>

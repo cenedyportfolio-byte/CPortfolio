@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { VisitorProvider } from "@/components/providers/VisitorProvider";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -74,17 +75,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased scroll-smooth`}
+      className={`${inter.variable} h-full antialiased scroll-smooth overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col">
-        <CustomCursor />
-        <a 
-          href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[9999] focus:p-4 focus:bg-primary focus:text-white focus:font-bold focus:top-0 focus:left-0"
-        >
-          Skip to content
-        </a>
-        {children}
+      <body className="min-h-full flex flex-col overflow-x-hidden">
+        <VisitorProvider>
+          <CustomCursor />
+          <a 
+            href="#main-content" 
+            className="sr-only focus:not-sr-only focus:absolute focus:z-[9999] focus:p-4 focus:bg-primary focus:text-white focus:font-bold focus:top-0 focus:left-0"
+          >
+            Skip to content
+          </a>
+          {children}
+        </VisitorProvider>
       </body>
     </html>
   );

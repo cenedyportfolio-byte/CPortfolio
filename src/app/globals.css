@@ -42,7 +42,7 @@
   --card-foreground: #0F172A;
   --primary: #6366F1;
   --primary-foreground: #FFFFFF;
-  --secondary: #8B5CF6;
+  --secondary: #14B8A6;
   --secondary-foreground: #FFFFFF;
   --muted: #F1F5F9;
   --muted-foreground: #64748B;
@@ -54,7 +54,7 @@
   --border: #E2E8F0;
   --input: #E2E8F0;
   --ring: #6366F1;
-  --radius: 1rem; /* Soft rounded corners */
+  --radius: 0.125rem; /* Sharp geometry (2px) */
 }
 
 .dark {
@@ -64,7 +64,7 @@
   --card-foreground: #F8FAFC;
   --primary: #6366F1;
   --primary-foreground: #FFFFFF;
-  --secondary: #8B5CF6;
+  --secondary: #14B8A6;
   --secondary-foreground: #FFFFFF;
   --muted: #1E293B;
   --muted-foreground: #94A3B8;
