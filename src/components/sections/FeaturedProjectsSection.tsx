@@ -78,7 +78,7 @@ export function FeaturedProjectsSection() {
               
               {/* Image / Gradient Header */}
               <div className={`w-full h-36 relative overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
+                <div className="absolute inset-0 bg-black/20 lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors">
                     <FaGithub size={18} />
                   </a>

@@ -89,10 +89,10 @@ export function AiAssistantSection() {
       </div>
 
       {/* Right Side: Chat Interface */}
-      <div className="md:w-2/3 w-full bg-card border border-border shadow-[4px_4px_0_0_var(--primary)] flex flex-col h-[500px]">
+      <div className="md:w-2/3 w-full bg-card border border-border shadow-[4px_4px_0_0_var(--primary)] flex flex-col h-[400px] sm:h-[450px] md:h-[500px]">
         
         {/* Chat Messages */}
-        <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+        <div ref={chatContainerRef} className="flex-1 overflow-y-auto overscroll-contain p-6 flex flex-col gap-6">
           {messages.length === 0 && (
             <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground gap-4">
               <Bot className="w-12 h-12 opacity-50 text-primary" />
@@ -101,7 +101,7 @@ export function AiAssistantSection() {
           )}
           
           {messages.map((m) => (
-            <div key={m.id} className={`flex gap-4 max-w-[80%] ${m.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}>
+            <div key={m.id} className={`flex gap-4 max-w-[90%] md:max-w-[80%] ${m.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}>
               <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center border ${m.role === 'user' ? 'bg-primary text-primary-foreground border-primary' : 'bg-card border-border'}`}>
                 {m.role === 'user' ? <User size={16} /> : <Bot size={16} />}
               </div>
@@ -111,7 +111,7 @@ export function AiAssistantSection() {
             </div>
           ))}
           {isLoading && (
-             <div className="flex gap-4 max-w-[80%]">
+             <div className="flex gap-4 max-w-[90%] md:max-w-[80%]">
                <div className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center border bg-card border-border animate-pulse">
                  <Bot size={16} />
                </div>

@@ -105,7 +105,7 @@ export function AboutSection() {
           
           <motion.div variants={motionItem} className="relative z-10 w-full max-w-sm mx-auto lg:mx-0">
             {/* Brutalist Photo Frame */}
-            <div className="relative w-full aspect-[4/5] overflow-hidden border border-foreground shadow-[8px_8px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,0.05)] mb-8 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="relative w-full aspect-[4/5] overflow-hidden border border-foreground shadow-[8px_8px_0px_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,0.05)] mb-8 transition-all duration-500">
               <Image
                 src="/images/about.png"
                 alt="Cenedy Udoy Palma — About"
@@ -147,7 +147,7 @@ export function AboutSection() {
         </div>
 
         {/* Right — AI Portfolio Assistant (Asymmetric Tension 70%) */}
-        <div className="w-full lg:w-[65%] p-6 md:p-12 lg:p-20 flex flex-col justify-center min-h-[80vh] bg-background">
+        <div className="w-full lg:w-[65%] p-4 sm:p-6 md:p-12 lg:p-20 flex flex-col justify-center min-h-[80vh] bg-background">
           <motion.div variants={motionItem} className="w-full max-w-4xl mx-auto">
             
             <div className="mb-8">
@@ -160,7 +160,7 @@ export function AboutSection() {
             </div>
 
             {/* Brutalist Chat Container */}
-            <div className="w-full h-[600px] border border-foreground flex flex-col shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.1)] bg-card overflow-hidden">
+            <div className="w-full h-[450px] sm:h-[500px] md:h-[600px] border border-foreground flex flex-col shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_rgba(255,255,255,0.1)] bg-card overflow-hidden">
               
               {/* Chat Header */}
               <div className="border-b border-foreground p-4 bg-muted/50 flex justify-between items-center">
@@ -182,7 +182,7 @@ export function AboutSection() {
                 <div className="flex-grow min-w-0 flex flex-col h-full bg-background border-r-0 md:border-r border-foreground">
                   <div 
                     ref={chatContainerRef}
-                    className="flex-1 overflow-y-auto p-6 space-y-6 text-sm scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent"
+                    className="flex-1 overflow-y-auto overscroll-contain p-6 space-y-6 text-sm scrollbar-thin scrollbar-thumb-foreground scrollbar-track-transparent"
                   >
                     <AnimatePresence initial={false}>
                       {messages.map((msg, index) => (

@@ -132,7 +132,7 @@ export function ProblemSolverSection() {
   };
 
   return (
-    <SectionWrapper id="process" className="bg-background pt-24 pb-32">
+    <SectionWrapper id="process" className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-[12vw] md:text-[8vw] font-black tracking-tighter text-foreground leading-[0.85] uppercase mb-6 mix-blend-difference">
@@ -146,7 +146,7 @@ export function ProblemSolverSection() {
         <div className="flex flex-col gap-12 relative">
           
           {/* Layer 1: The AI Solver Playground (Sticky) */}
-          <div className="sticky top-20 z-40 bg-background/80 backdrop-blur-xl border border-foreground p-6 md:p-10 shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.1)] mb-10 transition-all duration-300">
+          <div className="relative lg:sticky lg:top-24 z-40 bg-background/80 backdrop-blur-xl border border-foreground p-6 md:p-10 shadow-[16px_16px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_rgba(255,255,255,0.1)] mb-10 transition-all duration-300">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 pb-4 border-b border-foreground/20 gap-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-primary text-background flex items-center justify-center font-black">
@@ -182,7 +182,7 @@ export function ProblemSolverSection() {
                 e.preventDefault();
                 handleSolve();
               }}
-              className="relative flex flex-col md:flex-row items-end gap-4"
+              className="relative flex flex-col md:flex-row items-stretch md:items-end gap-4"
             >
               <textarea
                 rows={2}
@@ -195,7 +195,7 @@ export function ProblemSolverSection() {
               <button
                 type="submit"
                 disabled={isSolving || !problem.trim()}
-                className="shrink-0 h-[72px] px-8 bg-foreground text-background hover:bg-primary font-black uppercase tracking-widest disabled:opacity-50 transition-colors flex items-center justify-center gap-2 border-2 border-foreground"
+                className="w-full md:w-auto shrink-0 h-14 md:h-[72px] px-8 bg-foreground text-background hover:bg-primary font-black uppercase tracking-widest disabled:opacity-50 transition-colors flex items-center justify-center gap-2 border-2 border-foreground"
               >
                 Execute <Send className="w-4 h-4" />
               </button>

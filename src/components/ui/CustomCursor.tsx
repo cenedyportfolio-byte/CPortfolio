@@ -23,15 +23,14 @@ export function CustomCursor() {
   }, []);
 
   useEffect(() => {
-    // Detect touch device
-    const checkTouch = () => {
-      if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
-        setIsTouch(true);
-      }
-    };
-    checkTouch();
+    // Detect touch device synchronously to bypass event registration in this hook execution
+    const isTouchDevice = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    if (isTouchDevice) {
+      setIsTouch(true);
+      return;
+    }
 
-    if (isTouch || prefersReduced) return;
+    if (prefersReduced) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       targetRef.current = { x: e.clientX, y: e.clientY };

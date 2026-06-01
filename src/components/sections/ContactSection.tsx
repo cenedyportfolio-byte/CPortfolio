@@ -13,11 +13,11 @@ export function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col lg:flex-row items-center justify-between gap-10"
+            className="flex flex-col lg:flex-row items-center lg:justify-between text-center lg:text-left gap-10"
           >
             {/* Left — CTA */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 flex items-center gap-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 flex flex-wrap items-center justify-center lg:justify-start gap-2">
                 <span>Let&apos;s build something amazing together!</span>
                 <Rocket className="w-8 h-8 text-white animate-pulse inline-block" />
               </h2>
@@ -27,7 +27,7 @@ export function ContactSection() {
             </div>
 
             {/* Right — Contact Info */}
-            <div className="flex flex-wrap items-center gap-6 text-white">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 sm:gap-6 text-white w-full lg:w-auto">
               <a href="mailto:cenedypalma@gmail.com" className="flex items-center gap-2 text-sm hover:underline">
                 <Mail className="w-4 h-4" /> cenedypalma@gmail.com
               </a>
