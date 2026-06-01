@@ -685,74 +685,77 @@ export function SpaceShooter({ onScoreSubmitted }: SpaceShooterProps) {
 
         {/* IDLE Overlay */}
         {gameState === 'IDLE' && (
-          <div className="absolute inset-0 bg-[#0B1020]/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-20">
-            <Gamepad2 className="w-16 h-16 text-[#6366f1] drop-shadow-[0_0_15px_rgba(99,102,241,0.5)] mb-4" />
-            <h4 className="font-black text-2xl uppercase tracking-widest text-white mb-2">DEFENDER: SPACE SHIELD</h4>
-            <p className="text-xs text-white/70 uppercase tracking-wider mb-8 max-w-md leading-relaxed">
+          <div className="absolute inset-0 bg-[#0B1020]/80 backdrop-blur-sm flex flex-col items-center justify-center p-4 md:p-6 text-center z-20 overflow-y-auto">
+            <Gamepad2 className="w-8 h-8 md:w-16 md:h-16 text-[#6366f1] drop-shadow-[0_0_15px_rgba(99,102,241,0.5)] mb-2 md:mb-4 shrink-0" />
+            <h4 className="font-black text-lg md:text-2xl uppercase tracking-widest text-white mb-1 md:mb-2 shrink-0">DEFENDER: SPACE SHIELD</h4>
+            <p className="text-[10px] md:text-xs text-white/70 uppercase tracking-wider mb-4 md:mb-8 max-w-md leading-relaxed hidden sm:block shrink-0">
               Use arrow keys or WASD to move. Spacebar to fire. <br/> Preserve energy and maintain accuracy for high scores.
+            </p>
+            <p className="text-[9px] text-white/70 uppercase tracking-wider mb-3 leading-relaxed sm:hidden shrink-0">
+              Tap sides to move. Tap FIRE to shoot.
             </p>
             <button
               onClick={startGame}
-              className="bg-[#6366f1] text-white font-black text-sm uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-[#8b5cf6] hover:scale-105 transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] flex items-center gap-2"
+              className="bg-[#6366f1] text-white font-black text-xs md:text-sm uppercase tracking-widest px-6 py-2 md:px-8 md:py-4 rounded-xl hover:bg-[#8b5cf6] hover:scale-105 transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] flex items-center gap-2 shrink-0 my-auto md:my-0"
             >
-              <Play className="w-5 h-5 fill-white" /> INITIALIZE
+              <Play className="w-4 h-4 md:w-5 md:h-5 fill-white" /> INITIALIZE
             </button>
           </div>
         )}
 
         {/* GAMEOVER Overlay */}
         {gameState === 'GAMEOVER' && (
-          <div className="absolute inset-0 bg-[#0B1020]/95 backdrop-blur-md flex flex-col items-center justify-center p-6 z-20 text-white">
-            <h4 className="font-black text-3xl uppercase tracking-tighter text-[#ef4444] drop-shadow-[0_0_10px_rgba(239,68,68,0.8)] mb-6">MISSION FAILED</h4>
+          <div className="absolute inset-0 bg-[#0B1020]/95 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-6 z-20 text-white overflow-y-auto">
+            <h4 className="font-black text-xl md:text-3xl uppercase tracking-tighter text-[#ef4444] drop-shadow-[0_0_10px_rgba(239,68,68,0.8)] mb-4 mt-auto md:mt-0 shrink-0">MISSION FAILED</h4>
             
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8 w-full max-w-xs">
-              <div className="flex flex-col items-end border-r border-white/10 pr-4">
-                <span className="text-[10px] text-white/50 uppercase tracking-widest">Final Score</span>
-                <span className="text-2xl font-black text-[#22d3ee]">{score}</span>
+            <div className="grid grid-cols-2 gap-x-4 md:gap-x-8 gap-y-2 md:gap-y-4 mb-4 md:mb-8 w-full max-w-xs shrink-0">
+              <div className="flex flex-col items-end border-r border-white/10 pr-2 md:pr-4">
+                <span className="text-[8px] md:text-[10px] text-white/50 uppercase tracking-widest">Final Score</span>
+                <span className="text-lg md:text-2xl font-black text-[#22d3ee]">{score}</span>
               </div>
-              <div className="flex flex-col items-start pl-4">
-                <span className="text-[10px] text-white/50 uppercase tracking-widest">Accuracy</span>
-                <span className="text-2xl font-black text-white">{accuracy}%</span>
+              <div className="flex flex-col items-start pl-2 md:pl-4">
+                <span className="text-[8px] md:text-[10px] text-white/50 uppercase tracking-widest">Accuracy</span>
+                <span className="text-lg md:text-2xl font-black text-white">{accuracy}%</span>
               </div>
-              <div className="flex flex-col items-end border-r border-white/10 pr-4">
-                <span className="text-[10px] text-white/50 uppercase tracking-widest">Kills</span>
-                <span className="text-xl font-bold text-white">{enemiesDestroyed}</span>
+              <div className="flex flex-col items-end border-r border-white/10 pr-2 md:pr-4">
+                <span className="text-[8px] md:text-[10px] text-white/50 uppercase tracking-widest">Kills</span>
+                <span className="text-base md:text-xl font-bold text-white">{enemiesDestroyed}</span>
               </div>
-              <div className="flex flex-col items-start pl-4">
-                <span className="text-[10px] text-white/50 uppercase tracking-widest">XP Earned</span>
-                <span className="text-xl font-bold text-[#8b5cf6]">{xpEarned > 0 ? `+${xpEarned}` : '0'}</span>
+              <div className="flex flex-col items-start pl-2 md:pl-4">
+                <span className="text-[8px] md:text-[10px] text-white/50 uppercase tracking-widest">XP Earned</span>
+                <span className="text-base md:text-xl font-bold text-[#8b5cf6]">{xpEarned > 0 ? `+${xpEarned}` : '0'}</span>
               </div>
             </div>
 
             {submitSuccess ? (
-              <div className="text-[#10b981] font-bold text-sm uppercase tracking-widest mb-6 flex items-center gap-2">
+              <div className="text-[#10b981] font-bold text-xs md:text-sm uppercase tracking-widest mb-4 md:mb-6 flex items-center gap-2 shrink-0">
                 <Award className="w-4 h-4" /> Score Submitted Successfully!
               </div>
             ) : (
-              <div className="flex flex-col gap-3 w-full max-w-xs mb-6">
+              <div className="flex flex-col gap-2 md:gap-3 w-full max-w-xs mb-4 md:mb-6 shrink-0">
                 <input 
                   type="text" 
                   value={playerName}
                   onChange={e => setPlayerName(e.target.value)}
                   placeholder="Enter Pilot Name"
-                  className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-[#6366f1] transition-colors"
+                  className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-white focus:outline-none focus:border-[#6366f1] transition-colors"
                   maxLength={15}
                 />
                 <button
                   onClick={submitScore}
                   disabled={isSubmitting || !playerName.trim() || score === 0}
-                  className="bg-white/10 hover:bg-white/20 disabled:opacity-50 text-white font-bold text-xs uppercase tracking-widest px-4 py-3 rounded-lg transition-colors flex justify-center items-center gap-2"
+                  className="bg-white/10 hover:bg-white/20 disabled:opacity-50 text-white font-bold text-[10px] md:text-xs uppercase tracking-widest px-3 py-2 md:px-4 md:py-3 rounded-lg transition-colors flex justify-center items-center gap-2"
                 >
-                  <Trophy className="w-4 h-4" /> Submit to Leaderboard
+                  <Trophy className="w-3 h-3 md:w-4 md:h-4" /> Submit to Leaderboard
                 </button>
               </div>
             )}
 
             <button
               onClick={startGame}
-              className="bg-[#6366f1] text-white font-black text-xs uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-[#8b5cf6] transition-all shadow-[0_0_15px_rgba(99,102,241,0.4)] flex items-center gap-2"
+              className="bg-[#6366f1] text-white font-black text-[10px] md:text-xs uppercase tracking-widest px-6 py-2 md:px-8 md:py-3 rounded-xl hover:bg-[#8b5cf6] transition-all shadow-[0_0_15px_rgba(99,102,241,0.4)] flex items-center gap-2 shrink-0 mb-auto md:mb-0"
             >
-              <RotateCcw className="w-4 h-4" /> PLAY AGAIN
+              <RotateCcw className="w-3 h-3 md:w-4 md:h-4" /> PLAY AGAIN
             </button>
           </div>
         )}
@@ -819,7 +822,7 @@ export function GameLeaderboard({ refreshTrigger }: { refreshTrigger: boolean })
   }, [refreshTrigger]);
 
   return (
-    <div className="w-full bg-card border border-border p-6 shadow-[4px_4px_0_0_var(--primary)] flex flex-col gap-6 h-full transition-all duration-300">
+    <div className="w-full bg-card border border-border p-4 md:p-6 shadow-[4px_4px_0_0_var(--primary)] flex flex-col gap-4 md:gap-6 h-full transition-all duration-300">
       
       {/* Top 3 Pilots */}
       <div className="flex-1">

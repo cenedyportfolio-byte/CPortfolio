@@ -56,7 +56,7 @@ export function HeroSection() {
               initial={{ opacity: 0, x: -30, y: -20 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8, type: "spring", stiffness: 150 }}
-              className="absolute -top-6 -left-6 w-20 h-20 bg-foreground text-background flex items-center justify-center text-3xl font-mono font-black shadow-2xl z-40 hover:rotate-12 transition-transform duration-300"
+              className="absolute -top-4 -left-2 md:-top-6 md:-left-6 w-16 h-16 md:w-20 md:h-20 bg-foreground text-background flex items-center justify-center text-2xl md:text-3xl font-mono font-black shadow-2xl z-40 hover:rotate-12 transition-transform duration-300"
             >
               {"</>"}
             </motion.div>
@@ -65,7 +65,7 @@ export function HeroSection() {
               initial={{ opacity: 0, x: 30, y: 20 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0, type: "spring", stiffness: 120 }}
-              className="absolute -bottom-8 -right-8 bg-background border border-foreground px-6 py-4 shadow-[8px_8px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_rgba(255,255,255,1)] z-40 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_rgba(255,255,255,1)] transition-all duration-300"
+              className="absolute -bottom-4 -right-2 md:-bottom-8 md:-right-8 bg-background border border-foreground px-4 py-3 md:px-6 md:py-4 shadow-[6px_6px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_rgba(255,255,255,1)] md:dark:shadow-[8px_8px_0px_rgba(255,255,255,1)] z-40 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0px_rgba(0,0,0,1)] dark:hover:shadow-[10px_10px_0px_rgba(255,255,255,1)] transition-all duration-300"
             >
               <div className="flex items-center gap-3">
                 <Zap className="w-6 h-6 text-primary fill-primary animate-pulse" />
@@ -80,7 +80,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* Asymmetric Bottom Content */}
-        <div className="pt-10 pb-8 w-full flex flex-col md:flex-row justify-between items-end gap-10 relative z-30">
+        <div className="pt-10 pb-8 w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 relative z-30">
           
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -140,17 +140,17 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="w-full border-y border-foreground/10 bg-muted/30 backdrop-blur-sm py-4 relative z-40 overflow-hidden"
+        className="w-full border-y border-foreground/10 bg-muted/30 backdrop-blur-sm py-4 md:py-6 relative z-40 overflow-hidden"
       >
         <div className="container mx-auto px-4 max-w-[1400px]">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x divide-foreground/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 md:gap-8">
             {[
               { value: `${String(new Date().getFullYear() - 2021).padStart(2, '0')}+`, label: "Years Experience", icon: <Briefcase className="w-4 h-4" /> },
               { value: "10+", label: "Projects Delivered", icon: <FolderGit className="w-4 h-4" /> },
               { value: "06+", label: "Core Technologies", icon: <Cpu className="w-4 h-4" /> },
               { value: "∞", label: "Problems Solved", icon: <Trophy className="w-4 h-4" /> },
             ].map((stat, index) => (
-              <div key={stat.label} className={`flex items-center gap-4 ${index !== 0 ? 'pl-4 md:pl-8' : ''}`}>
+              <div key={stat.label} className={`flex items-center gap-3 ${index === 0 ? '' : index === 2 ? 'md:border-l md:border-foreground/10 md:pl-8' : 'border-l border-foreground/10 pl-4 md:pl-8'}`}>
                 <div className="text-primary hidden sm:block">{stat.icon}</div>
                 <div>
                   <p className="text-xl md:text-2xl font-black text-foreground font-mono leading-none">{stat.value}</p>
