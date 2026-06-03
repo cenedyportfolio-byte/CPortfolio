@@ -18,8 +18,8 @@ export default function Home() {
       "name": "Cenedy Udoy Palma",
       "alternateName": "Cenedy Palma",
       "jobTitle": "Software Engineer & Product Builder",
-      "url": "https://cenedy.is-a.dev",
-      "image": "https://cenedy.is-a.dev/images/hero.png",
+      "url": "https://cenedypalma.com",
+      "image": "https://cenedypalma.com/images/hero.png",
       "description": "I research problems, plan solutions, design experiences, and build scalable full-stack applications. I own the complete product lifecycle: Research, Planning, UI/UX, Frontend, Backend, Deployment, and Product Growth.",
       "address": {
         "@type": "PostalAddress",
