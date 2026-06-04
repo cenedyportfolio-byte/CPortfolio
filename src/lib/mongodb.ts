@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
-}
+// Environment variable check is now inside connectToDatabase
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
@@ -24,6 +20,12 @@ if (!cached) {
 async function connectToDatabase() {
   if (cached.conn) {
     return cached.conn;
+  }
+
+  if (!MONGODB_URI) {
+    throw new Error(
+      "Please define the MONGODB_URI environment variable. Make sure to pass it to Docker or set it in .env"
+    );
   }
 
   if (!cached.promise) {
