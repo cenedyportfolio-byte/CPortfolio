@@ -1,0 +1,197 @@
+/* Container styling */
+.animation-container {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: transparent;
+}
+
+/* --- Rabbit Graphics --- */
+.rabbit-wrapper {
+  position: relative;
+  margin-top: 100px;
+  width: 150px;
+  height: 150px;
+  animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.rabbit {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 40px auto 0;
+}
+
+.face {
+  position: absolute;
+  width: 100px;
+  height: 90px;
+  background: #ffffff;
+  border: 4px solid #333;
+  border-radius: 50% 50% 45% 45%;
+  bottom: 0;
+  z-index: 2;
+}
+
+.ears {
+  position: absolute;
+  width: 24px;
+  height: 70px;
+  background: #ffffff;
+  border: 4px solid #333;
+  border-radius: 50% 50% 0 0;
+  top: -10px;
+  z-index: 1;
+  transform-origin: bottom center;
+}
+
+.left-ear { left: 15px; transform: rotate(-10deg); animation: twitchLeft 3s ease-in-out infinite; }
+.right-ear { right: 15px; transform: rotate(10deg); animation: twitchRight 3s ease-in-out infinite; }
+
+/* Ear Insides */
+.ears::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  background: #ffb6c1;
+  border-radius: 50% 50% 0 0;
+  left: 3px;
+  top: 8px;
+}
+
+.eyes {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #333;
+  border-radius: 50%;
+  top: 35px;
+  animation: blink 4s infinite;
+}
+.left-eye { left: 25px; }
+.right-eye { right: 25px; }
+
+.blush {
+  position: absolute;
+  width: 12px;
+  height: 6px;
+  background: rgba(255, 182, 193, 0.8);
+  border-radius: 50%;
+  top: 48px;
+}
+.left-blush { left: 14px; }
+.right-blush { right: 14px; }
+
+.nose {
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background: #ff6b81;
+  border-radius: 50%;
+  top: 46px;
+  left: 46px;
+}
+
+.mouth {
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  border: 3px solid #333;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  top: 52px;
+  left: 42px;
+}
+
+/* --- Speech Bubble --- */
+.speech-bubble {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #6c5ce7;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: speakUp 0.5s 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: #6c5ce7 transparent;
+}
+
+/* --- The Dragged Sign --- */
+.drag-sign {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+  background: #00cec9;
+  border: 4px solid #333;
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-shadow: 0 8px 0 #333;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dragDown 1.5s 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.arrow {
+  animation: bounceArrow 0.8s infinite alternate;
+}
+
+/* --- Animations Keyframes --- */
+@keyframes popUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes speakUp {
+  to { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes dragDown {
+  to { opacity: 1; transform: translateY(40px); }
+}
+
+@keyframes twitchLeft {
+  0%, 90%, 100% { transform: rotate(-10deg); }
+  93%, 97% { transform: rotate(-18deg); }
+}
+
+@keyframes twitchRight {
+  0%, 90%, 100% { transform: rotate(10deg); }
+  92%, 96% { transform: rotate(18deg); }
+}
+
+@keyframes blink {
+  0%, 96%, 100% { transform: scaleY(1); }
+  98% { transform: scaleY(0.1); }
+}
+
+@keyframes bounceArrow {
+  to { transform: translateY(4px); }
+}
