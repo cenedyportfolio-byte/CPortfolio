@@ -1,3 +1,5 @@
+"use client";
+
 import './rabbit.css';
 
 export function RabbitAnimation() {
