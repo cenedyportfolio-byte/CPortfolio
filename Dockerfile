@@ -19,21 +19,24 @@ COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN npm run build
+# Use webpack instead of turbopack for a stable production build
+RUN npx next build --no-turbopack
 
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Install sharp for Next.js image optimization on Alpine
+RUN apk add --no-cache vips-dev
+RUN npm install --os=linux --cpu=x64 sharp@0.33.5
 
 COPY --from=builder /app/public ./public
 
