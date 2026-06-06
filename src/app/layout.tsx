@@ -71,6 +71,7 @@ import { InteractivePet } from "@/components/ui/InteractivePet";
 import { PetPlayground } from "@/components/ui/PetPlayground";
 import { SuggestionBox } from "@/components/ui/SuggestionBox";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({
   children,
@@ -102,6 +103,7 @@ export default function RootLayout({
               Skip to content
             </a>
             {children}
+            <Analytics />
           </VisitorProvider>
         </ThemeProvider>
       </body>
