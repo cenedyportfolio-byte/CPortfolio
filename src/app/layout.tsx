@@ -69,6 +69,8 @@ export const metadata: Metadata = {
 
 import { InteractivePet } from "@/components/ui/InteractivePet";
 import { PetPlayground } from "@/components/ui/PetPlayground";
+import { SuggestionBox } from "@/components/ui/SuggestionBox";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -79,20 +81,29 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} h-full antialiased scroll-smooth overflow-x-hidden`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col overflow-x-hidden">
-        <VisitorProvider>
-          <CustomCursor />
-          <InteractivePet />
-          <PetPlayground />
-          <a 
-            href="#main-content" 
-            className="sr-only focus:not-sr-only focus:absolute focus:z-[9999] focus:p-4 focus:bg-primary focus:text-white focus:font-bold focus:top-0 focus:left-0"
-          >
-            Skip to content
-          </a>
-          {children}
-        </VisitorProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <VisitorProvider>
+            <CustomCursor />
+            <SuggestionBox />
+            <InteractivePet />
+            <PetPlayground />
+            <a 
+              href="#main-content" 
+              className="sr-only focus:not-sr-only focus:absolute focus:z-[9999] focus:p-4 focus:bg-primary focus:text-white focus:font-bold focus:top-0 focus:left-0"
+            >
+              Skip to content
+            </a>
+            {children}
+          </VisitorProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

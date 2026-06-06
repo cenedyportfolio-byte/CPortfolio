@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages, LanguageModelV1 } from 'ai';
+import { streamText, convertToModelMessages } from 'ai';
 import { google } from '@ai-sdk/google';
 import { createGroq } from '@ai-sdk/groq';
 import connectToDatabase from '@/lib/mongodb';
@@ -9,10 +9,10 @@ const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
-function createFallbackModel(primary: LanguageModelV1, secondary: LanguageModelV1): LanguageModelV1 {
+function createFallbackModel(primary: any, secondary: any): any {
   return {
-    ...primary,
-    async doStream(options: Parameters<LanguageModelV1['doStream']>[0]) {
+    ...(primary as any),
+    async doStream(options: any) {
       try {
         return await primary.doStream(options);
       } catch (e) {
@@ -20,7 +20,7 @@ function createFallbackModel(primary: LanguageModelV1, secondary: LanguageModelV
         return await secondary.doStream(options);
       }
     },
-    async doGenerate(options: Parameters<LanguageModelV1['doGenerate']>[0]) {
+    async doGenerate(options: any) {
       try {
         return await primary.doGenerate(options);
       } catch (e) {
