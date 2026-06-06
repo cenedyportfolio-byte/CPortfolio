@@ -59,9 +59,9 @@ export function HeroSection() {
       <div className="container mx-auto px-4 md:px-8 max-w-[1400px] relative z-10 flex-1 flex flex-col justify-center">
         
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
         >
           <h1 className={`text-[clamp(2.8rem,19.5vw,15.5rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isHovered ? 'z-0 blur-[12px] opacity-30 scale-[0.98]' : 'z-0 blur-none opacity-100 scale-100'}`}>
@@ -80,9 +80,9 @@ export function HeroSection() {
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-square cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isHovered ? 'z-50 scale-[1.08]' : 'z-10 scale-100'}`}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ scale: 0.95, rotate: -2 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
               className="w-full h-full relative group"
             >
               <div className="absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-4">
@@ -98,18 +98,18 @@ export function HeroSection() {
 
             {/* Brutalist Floating Elements */}
             <motion.div
-              initial={{ opacity: 0, x: -30, y: -20 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8, type: "spring", stiffness: 150 }}
+              initial={{ x: -15, y: -10 }}
+              animate={{ x: 0, y: 0 }}
+              transition={{ duration: 0.6, type: "spring", stiffness: 150 }}
               className="absolute -top-4 -left-2 md:-top-6 md:-left-6 w-16 h-16 md:w-20 md:h-20 bg-foreground text-background flex items-center justify-center text-2xl md:text-3xl font-mono font-black shadow-2xl z-40 hover:rotate-12 transition-transform duration-300"
             >
               {"</>"}
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 30, y: 20 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.0, type: "spring", stiffness: 120 }}
+              initial={{ x: 15, y: 10 }}
+              animate={{ x: 0, y: 0 }}
+              transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
               className="absolute -bottom-4 -right-2 md:-bottom-8 md:-right-8 bg-background border border-foreground px-4 py-3 md:px-6 md:py-4 shadow-[6px_6px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_rgba(255,255,255,1)] md:dark:shadow-[8px_8px_0px_rgba(255,255,255,1)] z-40 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0px_rgba(0,0,0,1)] dark:hover:shadow-[10px_10px_0px_rgba(255,255,255,1)] transition-all duration-300"
             >
               <div className="flex items-center gap-3">
