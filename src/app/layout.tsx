@@ -68,6 +68,7 @@ export const metadata: Metadata = {
 
 import { ClientWidgets } from "@/components/ui/ClientWidgets";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({
   children,
@@ -98,6 +99,7 @@ export default function RootLayout({
             {children}
           </VisitorProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
