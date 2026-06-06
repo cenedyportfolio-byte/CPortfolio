@@ -1,169 +1,177 @@
-/* Container styling */
-.animation-container {
+/* ============================================
+   Astro-Rabbit: High-Tech Mascot
+   ============================================ */
+
+.astro-rabbit-container {
+  width: 140px; /* Medium size, very noticeable but not oversized */
+  transform-origin: right center;
+  animation: astroSlideIn 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  padding-right: 12px;
+}
+
+@keyframes astroSlideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0%); }
+}
+
+/* Base SVG styling & hover scale */
+.astro-rabbit-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: astroHover 4.5s ease-in-out infinite;
+}
+
+.astro-rabbit-container:hover .astro-rabbit-svg {
+  transform: scale(1.08) translateY(-6px);
+}
+
+/* Overall hover floating */
+@keyframes astroHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Glowing Aura */
+.astro-pulse {
+  animation: auraPulse 4s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+/* Inner Ear Glow */
+.astro-glow-pulse {
+  animation: innerGlowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes innerGlowPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Ears floating/twitching independently */
+.astro-ear-l {
+  transform-origin: 42px 34px;
+  animation: earFloatL 3.8s ease-in-out infinite;
+}
+
+.astro-ear-r {
+  transform-origin: 78px 34px;
+  animation: earFloatR 4.2s ease-in-out infinite;
+}
+
+@keyframes earFloatL {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(-6deg) translateY(-4px); }
+}
+
+@keyframes earFloatR {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(6deg) translateY(-4px); }
+}
+
+/* Head gentle bob */
+.astro-head {
+  animation: headBob 4.5s ease-in-out infinite;
+}
+
+@keyframes headBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* Digital Eyes Blinking */
+.astro-eyes {
+  transform-origin: 60px 78px;
+  animation: digitalBlink 5s infinite;
+}
+
+@keyframes digitalBlink {
+  0%, 46%, 50%, 100% { transform: scaleY(1); }
+  48% { transform: scaleY(0); }
+}
+
+/* Floating Paws */
+.astro-paw-l {
+  animation: pawFloatL 3.5s ease-in-out infinite;
+}
+
+.astro-paw-r {
+  animation: pawFloatR 3.7s ease-in-out infinite;
+}
+
+@keyframes pawFloatL {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-5px) translateX(2px); }
+}
+
+@keyframes pawFloatR {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-6px) translateX(-2px); }
+}
+
+/* Sleek Notification Bubble */
+.astro-bubble {
   position: relative;
-  width: 200px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: visible;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: transparent;
-  /* Rotate the entire container so it points leftwards out of the right edge */
-  transform: rotate(-90deg);
-  /* Shift it so it aligns with the right edge correctly */
-  margin-right: -25px;
-}
-
-/* --- Rabbit Graphics --- */
-.rabbit-wrapper {
-  position: relative;
-  margin-top: 10px;
-  width: 150px;
-  height: 150px;
-  animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  opacity: 0;
-  transform: translateY(150px);
-}
-
-.rabbit {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 40px auto 0;
-}
-
-.face {
-  position: absolute;
-  width: 100px;
-  height: 90px;
-  background: #ffffff;
-  border: 4px solid #333;
-  border-radius: 50% 50% 45% 45%;
-  bottom: 0;
-  z-index: 2;
-}
-
-.ears {
-  position: absolute;
-  width: 24px;
-  height: 70px;
-  background: #ffffff;
-  border: 4px solid #333;
-  border-radius: 50% 50% 0 0;
-  top: -10px;
-  z-index: 1;
-  transform-origin: bottom center;
-}
-
-.left-ear { left: 15px; transform: rotate(-10deg); animation: twitchLeft 3s ease-in-out infinite; }
-.right-ear { right: 15px; transform: rotate(10deg); animation: twitchRight 3s ease-in-out infinite; }
-
-/* Ear Insides */
-.ears::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 50px;
-  background: #ffb6c1;
-  border-radius: 50% 50% 0 0;
-  left: 3px;
-  top: 8px;
-}
-
-.eyes {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #333;
-  border-radius: 50%;
-  top: 35px;
-  animation: blink 4s infinite;
-}
-.left-eye { left: 25px; }
-.right-eye { right: 25px; }
-
-.blush {
-  position: absolute;
-  width: 12px;
-  height: 6px;
-  background: rgba(255, 182, 193, 0.8);
-  border-radius: 50%;
-  top: 48px;
-}
-.left-blush { left: 14px; }
-.right-blush { right: 14px; }
-
-.nose {
-  position: absolute;
-  width: 8px;
-  height: 6px;
-  background: #ff6b81;
-  border-radius: 50%;
-  top: 46px;
-  left: 46px;
-}
-
-.mouth {
-  position: absolute;
-  width: 12px;
-  height: 8px;
-  border: 3px solid #333;
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  top: 52px;
-  left: 42px;
-}
-
-/* --- Speech Bubble --- */
-.speech-bubble {
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%) scale(0);
-  background: #6c5ce7;
-  color: white;
-  padding: 10px 16px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  padding: 8px 16px;
   border-radius: 20px;
-  font-weight: bold;
-  font-size: 14px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-align: center;
   white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  animation: speakUp 0.5s 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  margin-bottom: 8px;
+  margin-right: -4px; /* Align slightly over the robot */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: bubbleSlideIn 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  transition: all 0.3s ease;
 }
 
-.speech-bubble::after {
-  content: '';
+.astro-rabbit-container:hover .astro-bubble {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.3);
+}
+
+.astro-bubble-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #c084fc;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #c084fc;
+  animation: innerGlowPulse 2s infinite;
+}
+
+.astro-bubble-arrow {
   position: absolute;
-  bottom: -8px;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 8px 8px 0;
-  border-style: solid;
-  border-color: #6c5ce7 transparent;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(15, 23, 42, 0.85);
+  transition: border-top-color 0.3s ease;
 }
 
-/* --- Animations Keyframes --- */
-@keyframes popUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes speakUp {
-  to { transform: translateX(-50%) scale(1); }
-}
-
-@keyframes twitchLeft {
-  0%, 90%, 100% { transform: rotate(-10deg); }
-  93%, 97% { transform: rotate(-18deg); }
-}
-
-@keyframes twitchRight {
-  0%, 90%, 100% { transform: rotate(10deg); }
-  92%, 96% { transform: rotate(18deg); }
-}
-
-@keyframes blink {
-  0%, 96%, 100% { transform: scaleY(1); }
-  98% { transform: scaleY(0.1); }
+@keyframes bubbleSlideIn {
+  0% { opacity: 0; transform: translateY(15px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }

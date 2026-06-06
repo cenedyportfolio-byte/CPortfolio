@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { RabbitAnimation } from "@/components/ui/RabbitAnimation";
 import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy, Zap } from "lucide-react";
 import { 
   FaGithub, 
@@ -63,7 +64,7 @@ export function HeroSection() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
         >
-          <h1 className={`text-[clamp(2.8rem,19.5vw,15.5rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-500 ${isHovered ? 'z-30 scale-105' : 'z-0'}`}>
+          <h1 className={`text-[clamp(2.8rem,19.5vw,15.5rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isHovered ? 'z-0 blur-[12px] opacity-30 scale-[0.98]' : 'z-0 blur-none opacity-100 scale-100'}`}>
             <span className="block bg-gradient-to-r from-foreground via-foreground/90 to-primary bg-clip-text text-transparent dark:from-white dark:via-white/90 dark:to-indigo-300">
               CENEDY
             </span>
@@ -73,24 +74,27 @@ export function HeroSection() {
           </h1>
           
           {/* Overlapping Hero Image Fragment */}
-          <motion.div
+          <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-square z-10 group cursor-pointer"
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[33vw] lg:w-[34vw] max-w-[440px] aspect-square cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isHovered ? 'z-50 scale-[1.08]' : 'z-10 scale-100'}`}
           >
-            <div className="absolute inset-0 w-full h-full">
-              <Image
-                src="/images/hero.png"
-                alt="Cenedy Udoy Palma"
-                fill
-                sizes="(max-width: 768px) 60vw, 26vw"
-                className="object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)]"
-                priority
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, rotate: -2 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-full relative group"
+            >
+              <div className="absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-4">
+                <Image
+                  src="/images/hero.png"
+                  alt="Cenedy Udoy Palma"
+                  fill
+                  sizes="(max-width: 768px) 60vw, 26vw"
+                  className="object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] transition-all duration-700 group-hover:drop-shadow-[0_30px_45px_rgba(0,0,0,0.4)]"
+                  priority
+                />
+              </div>
 
             {/* Brutalist Floating Elements */}
             <motion.div
@@ -117,6 +121,7 @@ export function HeroSection() {
               </div>
             </motion.div>
           </motion.div>
+          </div>
 
         </motion.div>
 
@@ -215,6 +220,8 @@ export function HeroSection() {
           ))}
         </div>
       </div>
+
+      <RabbitAnimation className="top-[35%] -translate-y-1/2" />
     </section>
   );
 }

@@ -47,7 +47,7 @@ export async function POST(req: Request) {
       try {
         const cleanedText = textResult.text.replace(/```json/g, '').replace(/```/g, '').trim();
         analysisData = JSON.parse(cleanedText);
-      } catch (parseError) {
+      } catch {
         throw new Error("Failed to parse Groq response into JSON: " + textResult.text);
       }
     }

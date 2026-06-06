@@ -17,21 +17,23 @@ export function FeaturedProjectsSection() {
   const [windowBlurred, setWindowBlurred] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   // Debounced/delayed state updater to bridge gap between leaving card and entering mockup without flickering
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (isOverCard) {
-      setHoveredProject(isOverCard);
+      timer = setTimeout(() => setHoveredProject(isOverCard), 0);
     } else if (isOverMockup) {
-      setHoveredProject(isOverMockup);
+      timer = setTimeout(() => setHoveredProject(isOverMockup), 0);
     } else {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setHoveredProject(null);
       }, 150);
-      return () => clearTimeout(timer);
     }
+    return () => clearTimeout(timer);
   }, [isOverCard, isOverMockup]);
 
   useEffect(() => {

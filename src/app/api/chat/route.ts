@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages } from 'ai';
+import { streamText, convertToModelMessages, LanguageModelV1 } from 'ai';
 import { google } from '@ai-sdk/google';
 import { createGroq } from '@ai-sdk/groq';
 import connectToDatabase from '@/lib/mongodb';
@@ -9,10 +9,10 @@ const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
-function createFallbackModel(primary: any, secondary: any): any {
+function createFallbackModel(primary: LanguageModelV1, secondary: LanguageModelV1): LanguageModelV1 {
   return {
     ...primary,
-    async doStream(options: any) {
+    async doStream(options: Parameters<LanguageModelV1['doStream']>[0]) {
       try {
         return await primary.doStream(options);
       } catch (e) {
@@ -20,7 +20,7 @@ function createFallbackModel(primary: any, secondary: any): any {
         return await secondary.doStream(options);
       }
     },
-    async doGenerate(options: any) {
+    async doGenerate(options: Parameters<LanguageModelV1['doGenerate']>[0]) {
       try {
         return await primary.doGenerate(options);
       } catch (e) {
@@ -64,7 +64,7 @@ IMPORTANT: Cenedy is a man. ALWAYS use male pronouns (he, him, his) when referri
 
           const lastUserMessage = messages[messages.length - 1];
           const lastUserText = lastUserMessage.parts
-            ? lastUserMessage.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('')
+            ? lastUserMessage.parts.filter((p: { type: string, text?: string }) => p.type === 'text').map((p: { text?: string }) => p.text).join('')
             : (lastUserMessage.content || '');
 
           chatRecord.messages.push({ role: 'user', content: lastUserText });

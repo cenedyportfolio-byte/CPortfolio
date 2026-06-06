@@ -8,7 +8,6 @@ import { TechStackSection } from "@/components/sections/TechStackSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { InteractiveConsole } from "@/components/sections/InteractiveConsole";
-import { RabbitAnimation } from "@/components/ui/RabbitAnimation";
 
 export default function Home() {
   const jsonLd = {
@@ -60,7 +59,6 @@ export default function Home() {
       
       <main id="main-content">
         <HeroSection />
-        <RabbitAnimation />
         <InteractiveConsole />
         <AboutSection />
         <ProblemSolverSection />

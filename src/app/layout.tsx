@@ -67,6 +67,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { InteractivePet } from "@/components/ui/InteractivePet";
+import { PetPlayground } from "@/components/ui/PetPlayground";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -80,6 +83,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <VisitorProvider>
           <CustomCursor />
+          <InteractivePet />
+          <PetPlayground />
           <a 
             href="#main-content" 
             className="sr-only focus:not-sr-only focus:absolute focus:z-[9999] focus:p-4 focus:bg-primary focus:text-white focus:font-bold focus:top-0 focus:left-0"
