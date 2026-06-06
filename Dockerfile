@@ -21,8 +21,7 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Use webpack instead of turbopack for a stable production build
-RUN npx next build --no-turbopack
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
