@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { VisitorProvider } from "@/components/providers/VisitorProvider";
 
 const inter = Inter({
@@ -67,9 +66,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { InteractivePet } from "@/components/ui/InteractivePet";
-import { PetPlayground } from "@/components/ui/PetPlayground";
-import { SuggestionBox } from "@/components/ui/SuggestionBox";
+import { ClientWidgets } from "@/components/ui/ClientWidgets";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export default function RootLayout({
@@ -86,15 +83,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
           <VisitorProvider>
-            <CustomCursor />
-            <SuggestionBox />
-            <InteractivePet />
-            <PetPlayground />
+            <ClientWidgets />
             <a 
               href="#main-content" 
               className="sr-only focus:not-sr-only focus:absolute focus:z-[9999] focus:p-4 focus:bg-primary focus:text-white focus:font-bold focus:top-0 focus:left-0"
