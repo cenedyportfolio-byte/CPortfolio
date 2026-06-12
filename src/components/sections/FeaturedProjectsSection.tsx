@@ -165,7 +165,7 @@ export function FeaturedProjectsSection() {
           {[...projects, ...projects, ...projects].map((project, index) => (
             <div 
               key={index} 
-              className="w-[280px] sm:w-[320px] shrink-0 group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px] cursor-help"
+              className="w-[280px] sm:w-[320px] shrink-0 group bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px] cursor-help"
               onMouseEnter={() => {
                 if (project.title === "Pokemon Trading Platform") {
                   setIsOverCard('pokemon');
@@ -461,7 +461,7 @@ export function FeaturedProjectsSection() {
                         "Screenshot 2026-06-01 193629.png",
                         "Screenshot 2026-06-01 193640.png"
                       ]).map((img, i) => (
-                        <div key={i} className="relative w-full aspect-[16/10] border-2 border-foreground rounded-xl overflow-hidden shadow-md bg-white">
+                        <div key={i} className="relative w-full aspect-[16/10] border-2 border-foreground rounded-xl overflow-hidden shadow-md bg-card">
                           <Image 
                             src={`/images/Projects/LCE/${img}`}
                             alt={`LCE Screenshot ${i}`}

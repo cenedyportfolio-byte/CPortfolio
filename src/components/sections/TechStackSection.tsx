@@ -57,7 +57,7 @@ export function TechStackSection() {
   ];
 
   return (
-    <SectionWrapper id="skills" className="bg-white">
+    <SectionWrapper id="skills" className="bg-background">
       <motion.div variants={motionItem} className="mb-12">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-3">
           Tech I Work With
