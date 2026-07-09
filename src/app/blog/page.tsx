@@ -1,16 +1,28 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { SchemaOrg } from "@/components/seo/SchemaOrg";
 
 export const metadata: Metadata = {
   title: "Blog & Engineering Insights",
   description: "Deep technical dives into Backend Architecture, AI Engineering, Next.js, and scaling software systems.",
+  alternates: {
+    canonical: "https://www.cenedypalma.com/blog",
+  }
 };
 
 export default function BlogIndex() {
   return (
     <div className="min-h-screen bg-background pt-32 pb-20">
+      <SchemaOrg 
+        type="WebSite" 
+        title="Blog & Engineering Insights - Cenedy Udoy Palma" 
+        url="https://www.cenedypalma.com/blog" 
+      />
       <div className="container mx-auto px-4 max-w-[1000px]">
         <header className="mb-16">
+          <p className="sr-only">
+            Summary: The technical engineering blog of Cenedy Udoy Palma. Features in-depth articles on Laravel, Node.js, React, TypeScript, AI integrations, microservices, and system architecture.
+          </p>
           <h1 className="text-4xl md:text-6xl font-black mb-4">Engineering Blog</h1>
           <p className="text-xl text-muted-foreground">Technical deep-dives into Laravel, Node.js, AI, and scalable architectures.</p>
         </header>

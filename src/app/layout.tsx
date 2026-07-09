@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { VisitorProvider } from "@/components/providers/VisitorProvider";
+import { SchemaOrg } from "@/components/seo/SchemaOrg";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -16,9 +17,9 @@ export const metadata: Metadata = {
     default: "Cenedy Udoy Palma | Backend Developer & AI Engineer",
     template: "%s | Cenedy Udoy Palma"
   },
-  description: "Cenedy Udoy Palma is a Senior Backend Developer and AI Product Builder from Bangladesh specializing in Laravel, Node.js, React, and Python. Discover his portfolio, projects, and architecture expertise.",
-  applicationName: "Cenedy Palma Portfolio",
-  authors: [{ name: "Cenedy Udoy Palma", url: "https://cenedypalma.com" }],
+  description: "Cenedy Udoy Palma is a Senior Backend Developer and AI Product Builder from Bangladesh specializing in Laravel, Node.js, React, and Python.",
+  applicationName: "Cenedy Udoy Palma Portfolio",
+  authors: [{ name: "Cenedy Udoy Palma", url: "https://www.cenedypalma.com" }],
   creator: "Cenedy Udoy Palma",
   publisher: "Cenedy Udoy Palma",
   generator: "Next.js",
@@ -118,6 +119,7 @@ export default function RootLayout({
             gtag('config', 'G-H200WJENPD');
           `}
         </Script>
+        <SchemaOrg type="WebSite" />
       </head>
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <ThemeProvider

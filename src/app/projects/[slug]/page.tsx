@@ -4,30 +4,34 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
+import { SchemaOrg } from "@/components/seo/SchemaOrg";
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const title = `${params.slug.replace(/-/g, ' ')} | Project Case Study | Cenedy Palma`;
   return {
-    title: `${params.slug.replace(/-/g, ' ')} | Project Case Study | Cenedy Palma`,
-    description: "Detailed engineering case study covering architecture, tech stack, and business outcomes.",
+    title,
+    description: "Detailed engineering case study covering architecture, tech stack, and business outcomes by Cenedy Udoy Palma.",
+    alternates: {
+      canonical: `https://www.cenedypalma.com/projects/${params.slug}`,
+    }
   };
 }
 
 export default function ProjectCaseStudy({ params }: { params: { slug: string } }) {
   if (!params.slug) return notFound();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": `Case Study: ${params.slug.replace(/-/g, ' ').toUpperCase()}`,
-    "author": {
-      "@type": "Person",
-      "name": "Cenedy Udoy Palma"
-    },
-    "articleSection": "Software Engineering Case Study",
-  };
+  const title = `Case Study: ${params.slug.replace(/-/g, ' ').toUpperCase()}`;
+  const url = `https://www.cenedypalma.com/projects/${params.slug}`;
 
   return (
     <article className="min-h-screen bg-background pt-32 pb-20">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SchemaOrg 
+        type="TechArticle" 
+        title={title} 
+        description="Detailed engineering case study by Cenedy Udoy Palma." 
+        url={url} 
+        datePublished="2026-07-09T00:00:00Z"
+      />
       <div className="container mx-auto px-4 max-w-[900px]">
         <Link href="/#projects" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 font-bold text-sm uppercase tracking-wider">
           <ArrowLeft size={16} /> Back to Projects

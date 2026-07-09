@@ -3,11 +3,17 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+import { SchemaOrg } from "@/components/seo/SchemaOrg";
+
 // In a real application, you would fetch this from a CMS or local MDX files.
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const title = `${params.slug.replace(/-/g, ' ')} | Cenedy Palma Blog`;
   return {
-    title: `${params.slug.replace(/-/g, ' ')} | Cenedy Palma Blog`,
+    title,
     description: "In-depth engineering article by Cenedy Udoy Palma.",
+    alternates: {
+      canonical: `https://www.cenedypalma.com/blog/${params.slug}`,
+    }
   };
 }
 
@@ -15,30 +21,17 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   // Demo check, fallback to 404
   if (!params.slug) return notFound();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": params.slug.replace(/-/g, ' ').toUpperCase(),
-    "author": {
-      "@type": "Person",
-      "name": "Cenedy Udoy Palma",
-      "url": "https://cenedypalma.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Cenedy Udoy Palma Portfolio",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://cenedypalma.com/images/hero.png"
-      }
-    }
-  };
+  const title = params.slug.replace(/-/g, ' ').toUpperCase();
+  const url = `https://www.cenedypalma.com/blog/${params.slug}`;
 
   return (
     <article className="min-h-screen bg-background pt-32 pb-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <SchemaOrg 
+        type="Article" 
+        title={title} 
+        description="In-depth engineering article by Cenedy Udoy Palma." 
+        url={url} 
+        datePublished="2026-07-09T00:00:00Z"
       />
       <div className="container mx-auto px-4 max-w-[800px]">
         <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-12 font-bold text-sm uppercase tracking-wider">
