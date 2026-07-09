@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { VisitorProvider } from "@/components/providers/VisitorProvider";
@@ -134,6 +135,7 @@ export default function RootLayout({
               Skip to content
             </a>
             {children}
+            <SpeedInsights />
           </VisitorProvider>
         </ThemeProvider>
       </body>
