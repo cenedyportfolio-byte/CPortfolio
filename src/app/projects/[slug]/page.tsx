@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   return {
