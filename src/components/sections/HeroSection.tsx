@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { RabbitAnimation } from "@/components/ui/RabbitAnimation";
+import { WeatherCanvas } from "@/components/ui/WeatherCanvas";
+import { WeatherWidget } from "@/components/ui/WeatherWidget";
+import { useWeather } from "@/hooks/useWeather";
 import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy, Zap } from "lucide-react";
 import { 
   FaGithub, 
@@ -31,6 +34,7 @@ import {
 
 export function HeroSection() {
   const [isHovered, setIsHovered] = useState(false);
+  const weather = useWeather();
 
   const techItems = [
     { name: "PHP", icon: <FaPhp className="w-5 h-5 text-[#777BB4]" /> },
@@ -52,6 +56,24 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
+      {/* Weather Canvas Animation Layer */}
+      <WeatherCanvas
+        weatherCode={weather.weatherCode}
+        isDay={weather.isDay}
+        isLoading={weather.isLoading}
+      />
+
+      {/* Weather Widget Badges */}
+      <WeatherWidget
+        temperature={weather.temperature}
+        weatherCode={weather.weatherCode}
+        weatherLabel={weather.weatherLabel}
+        isDay={weather.isDay}
+        location={weather.location}
+        isLoading={weather.isLoading}
+        error={weather.error}
+      />
+
       {/* Brutalist Background Elements */}
       <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-primary/5 blur-[120px] rounded-none pointer-events-none will-change-transform" />
       <div className="absolute bottom-0 left-0 w-[40vw] h-[40vh] bg-accent/5 blur-[100px] rounded-none pointer-events-none will-change-transform" />
