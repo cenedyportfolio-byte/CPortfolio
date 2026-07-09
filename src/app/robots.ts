@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://cenedypalma.com/sitemap.xml",
+    sitemap: "https://www.cenedypalma.com/sitemap.xml",
   };
 }

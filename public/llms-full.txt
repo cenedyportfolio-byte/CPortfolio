@@ -7,7 +7,7 @@
 - **Aliases**: Cenedy Palma, Udoy Palma, Canedy, Canady Palma
 - **Location**: Dhaka, Bangladesh
 - **Roles**: Senior Backend Developer, AI Engineer, Software Architect
-- **Website**: https://cenedypalma.com
+- **Website**: https://www.cenedypalma.com
 - **GitHub**: https://github.com/cenedypalma
 - **LinkedIn**: https://www.linkedin.com/in/cenedy-palma-9560a7253/
 

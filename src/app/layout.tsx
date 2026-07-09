@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cenedypalma.com"),
+  metadataBase: new URL("https://www.cenedypalma.com"),
   title: {
     default: "Cenedy Udoy Palma | Backend Developer & AI Engineer",
     template: "%s | Cenedy Udoy Palma"

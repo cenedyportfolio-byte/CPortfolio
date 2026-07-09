@@ -1,7 +1,7 @@
 /* TEAM */
   Engineer: Cenedy Udoy Palma
   Role: Senior Backend Developer & AI Product Builder
-  Site: https://cenedypalma.com
+  Site: https://www.cenedypalma.com
   Twitter: @cenedypalma
   Location: Dhaka, Bangladesh
 
