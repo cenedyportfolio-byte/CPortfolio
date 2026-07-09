@@ -163,8 +163,9 @@ export function FeaturedProjectsSection() {
           }}
         >
           {[...projects, ...projects, ...projects].map((project, index) => (
-            <div 
+            <article 
               key={index} 
+              aria-label={`Project: ${project.title}`}
               className="w-[280px] sm:w-[320px] shrink-0 group bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-[380px] cursor-help"
               onMouseEnter={() => {
                 if (project.title === "Pokemon Trading Platform") {
@@ -207,13 +208,13 @@ export function FeaturedProjectsSection() {
                   fill
                   sizes="(max-width: 768px) 280px, 320px"
                   className="object-cover group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
-                  priority
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/40 lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-10">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
+                  <a href={project.github} aria-label={`View ${project.title} source code on GitHub`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
                     <FaGithub size={18} />
                   </a>
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
+                  <a href={project.demo} aria-label={`View ${project.title} live demo`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-colors" onClick={(e) => e.stopPropagation()}>
                     <ExternalLink size={18} />
                   </a>
                 </div>
@@ -258,7 +259,7 @@ export function FeaturedProjectsSection() {
                   ))}
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </motion.div>

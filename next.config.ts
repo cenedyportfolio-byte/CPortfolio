@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: 'standalone',
   images: {
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

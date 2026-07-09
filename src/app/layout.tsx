@@ -12,31 +12,39 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://cenedypalma.com"),
   title: {
-    default: "Cenedy Udoy Palma | Software Engineer & Product Builder",
+    default: "Cenedy Udoy Palma | Backend Developer & AI Engineer",
     template: "%s | Cenedy Udoy Palma"
   },
-  description: "I research problems, plan solutions, design experiences, and build scalable full-stack applications. Discover the portfolio of Cenedy Udoy Palma.",
-  keywords: [
-    "Cenedy Udoy Palma",
-    "Cenedy Palma",
-    "Full Stack Developer",
-    "Product Builder",
-    "Product Lifecycle",
-    "Software Engineer",
-    "React Developer",
-    "Next.js Developer",
-    "Laravel Developer",
-    "Web Developer Dhaka",
-    "Portfolio"
-  ],
+  description: "Cenedy Udoy Palma is a Senior Backend Developer and AI Product Builder from Bangladesh specializing in Laravel, Node.js, React, and Python. Discover his portfolio, projects, and architecture expertise.",
+  applicationName: "Cenedy Palma Portfolio",
   authors: [{ name: "Cenedy Udoy Palma", url: "https://cenedypalma.com" }],
   creator: "Cenedy Udoy Palma",
+  publisher: "Cenedy Udoy Palma",
+  generator: "Next.js",
+  keywords: [
+    "Cenedy", "Cenedy Palma", "Udoy", "Udoy Palma", "Cenedy Udoy Palma", "Canady Palma", "Canedy", "Cenady",
+    "Palma Developer", "Palma Programmer", "Developer Cenedy", "Backend Developer Cenedy", "AI Engineer Cenedy",
+    "Laravel Cenedy", "Node.js Cenedy", "React Cenedy", "TypeScript Cenedy", "Full Stack Cenedy", 
+    "Bangladesh Backend Developer Cenedy", "Senior Backend Developer Bangladesh", "AI Product Builder Bangladesh", 
+    "Portfolio Cenedy", "GitHub Cenedy", "Cenedy GitHub", "Software Architect", "AI Engineer", "Product Engineer",
+    "Laravel Developer", "Node.js Developer", "Full Stack Developer", "Backend Architecture", "Microservices"
+  ],
+  alternates: {
+    canonical: "https://cenedypalma.com",
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   robots: {
     index: true,
     follow: true,
+    nocache: true,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
@@ -46,25 +54,40 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://cenedypalma.com",
-    title: "Cenedy Udoy Palma | Full Stack Developer & Product Builder",
-    description: "I research problems, plan solutions, design experiences, and build scalable full-stack applications. Discover my work.",
+    title: "Cenedy Udoy Palma | Backend Developer & AI Engineer",
+    description: "Senior Backend Developer and AI Product Builder from Bangladesh specializing in Laravel, Node.js, React, and Python. Discover my portfolio and architecture expertise.",
     siteName: "Cenedy Udoy Palma Portfolio",
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Cenedy Udoy Palma Portfolio",
+        alt: "Cenedy Udoy Palma - Backend Developer & AI Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cenedy Udoy Palma | Full Stack Developer & Product Builder",
-    description: "I research problems, plan solutions, design experiences, and build scalable full-stack applications.",
+    title: "Cenedy Udoy Palma | Backend Developer & AI Engineer",
+    description: "Senior Backend Developer and AI Product Builder specializing in Laravel, Node.js, React, and Python.",
     images: ["/images/og-image.png"],
     creator: "@cenedypalma",
+    site: "@cenedypalma",
   },
+  verification: {
+    google: "google-site-verification-placeholder",
+    yandex: "yandex-verification-placeholder",
+    yahoo: "yahoo-verification-placeholder",
+    other: {
+      me: ['cenedyportfolio@gmail.com', 'https://cenedypalma.com'],
+    },
+  },
+  appleWebApp: {
+    title: "Cenedy Palma",
+    statusBarStyle: "black-translucent",
+    capable: true,
+  },
+  category: "technology",
 };
 
 import { ClientWidgets } from "@/components/ui/ClientWidgets";

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { RabbitAnimation } from "@/components/ui/RabbitAnimation";
 import { WeatherCanvas } from "@/components/ui/WeatherCanvas";
 import { WeatherWidget } from "@/components/ui/WeatherWidget";
+import { HeroDeveloperPanel } from "@/components/ui/HeroDeveloperPanel";
 import { useWeather } from "@/hooks/useWeather";
 import { ArrowRight, Mail, Briefcase, FolderGit, Cpu, Trophy, Zap } from "lucide-react";
 import { 
@@ -37,25 +38,25 @@ export function HeroSection() {
   const weather = useWeather();
 
   const techItems = [
-    { name: "PHP", icon: <FaPhp className="w-5 h-5 text-[#777BB4]" /> },
-    { name: "Laravel", icon: <FaLaravel className="w-5 h-5 text-[#FF2D20]" /> },
-    { name: "Python", icon: <FaPython className="w-5 h-5 text-[#3776AB]" /> },
-    { name: "AWS", icon: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
-    { name: "Android", icon: <FaAndroid className="w-5 h-5 text-[#3DDC84]" /> },
-    { name: "React", icon: <FaReact className="w-5 h-5 text-[#61DAFB]" /> },
-    { name: "Next.js", icon: <SiNextdotjs className="w-5 h-5 text-foreground" /> },
-    { name: "Node.js", icon: <FaNodeJs className="w-5 h-5 text-[#339933]" /> },
-    { name: "TypeScript", icon: <SiTypescript className="w-5 h-5 text-[#3178C6]" /> },
-    { name: "JavaScript", icon: <SiJavascript className="w-5 h-5 text-[#F7DF1E]" /> },
-    { name: "Docker", icon: <FaDocker className="w-5 h-5 text-[#2496ED]" /> },
-    { name: "MongoDB", icon: <SiMongodb className="w-5 h-5 text-[#47A248]" /> },
-    { name: "MySQL", icon: <SiMysql className="w-5 h-5 text-[#4479A1]" /> },
-    { name: "PostgreSQL", icon: <SiPostgresql className="w-5 h-5 text-[#4169E1]" /> },
-    { name: "Tailwind CSS", icon: <SiTailwindcss className="w-5 h-5 text-[#06B6D4]" /> },
+    { name: "PHP", icon: <FaPhp title="PHP" className="w-5 h-5 text-[#777BB4]" /> },
+    { name: "Laravel", icon: <FaLaravel title="Laravel" className="w-5 h-5 text-[#FF2D20]" /> },
+    { name: "Python", icon: <FaPython title="Python" className="w-5 h-5 text-[#3776AB]" /> },
+    { name: "AWS", icon: <FaAws title="AWS" className="w-5 h-5 text-[#FF9900]" /> },
+    { name: "Android", icon: <FaAndroid title="Android" className="w-5 h-5 text-[#3DDC84]" /> },
+    { name: "React", icon: <FaReact title="React" className="w-5 h-5 text-[#61DAFB]" /> },
+    { name: "Next.js", icon: <SiNextdotjs title="Next.js" className="w-5 h-5 text-foreground" /> },
+    { name: "Node.js", icon: <FaNodeJs title="Node.js" className="w-5 h-5 text-[#339933]" /> },
+    { name: "TypeScript", icon: <SiTypescript title="TypeScript" className="w-5 h-5 text-[#3178C6]" /> },
+    { name: "JavaScript", icon: <SiJavascript title="JavaScript" className="w-5 h-5 text-[#F7DF1E]" /> },
+    { name: "Docker", icon: <FaDocker title="Docker" className="w-5 h-5 text-[#2496ED]" /> },
+    { name: "MongoDB", icon: <SiMongodb title="MongoDB" className="w-5 h-5 text-[#47A248]" /> },
+    { name: "MySQL", icon: <SiMysql title="MySQL" className="w-5 h-5 text-[#4479A1]" /> },
+    { name: "PostgreSQL", icon: <SiPostgresql title="PostgreSQL" className="w-5 h-5 text-[#4169E1]" /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss title="Tailwind CSS" className="w-5 h-5 text-[#06B6D4]" /> },
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-20">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background pt-24 pb-[120px]">
       {/* Weather Canvas Animation Layer */}
       <WeatherCanvas
         weatherCode={weather.weatherCode}
@@ -80,13 +81,25 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 md:px-8 max-w-[1400px] relative z-10 flex-1 flex flex-col justify-center">
         
-        <motion.div
-          initial={{ y: 30 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full flex justify-center items-center mt-12 md:mt-16 mb-20 md:mb-32"
-        >
-          <h1 className={`text-[clamp(2.8rem,19.5vw,15.5rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isHovered ? 'z-0 blur-[12px] opacity-30 scale-[0.98]' : 'z-0 blur-none opacity-100 scale-100'}`}>
+        {/* Main Hero Content Row */}
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full relative">
+          
+          {/* Left Column: Developer Panel */}
+          <div className="w-full md:w-auto flex-shrink-0 z-20">
+            <HeroDeveloperPanel />
+          </div>
+
+          {/* Center Column: Typography & Portrait */}
+          <motion.div
+            initial={{ y: 30 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 w-full flex justify-center items-center relative min-h-[500px] md:min-h-[600px] my-12 md:my-0"
+          >
+          <h1
+            className={`hidden md:block text-[clamp(2.2rem,16vw,12.5rem)] leading-[0.95] font-black tracking-tight uppercase relative pointer-events-none select-none text-center drop-shadow-2xl whitespace-nowrap transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ml-[50px] ${isHovered ? 'z-0 blur-[12px] opacity-25 scale-[0.98]' : 'z-0 blur-none opacity-[0.88] scale-100'}`}
+            aria-hidden="true"
+          >
             <span className="block bg-gradient-to-r from-foreground via-foreground/90 to-primary bg-clip-text text-transparent dark:from-white dark:via-white/90 dark:to-indigo-300">
               CENEDY
             </span>
@@ -115,6 +128,7 @@ export function HeroSection() {
                   sizes="(max-width: 768px) 60vw, 26vw"
                   className="object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] transition-all duration-700 group-hover:drop-shadow-[0_30px_45px_rgba(0,0,0,0.4)]"
                   priority
+                  fetchPriority="high"
                 />
               </div>
 
@@ -145,10 +159,14 @@ export function HeroSection() {
           </motion.div>
           </div>
 
-        </motion.div>
+          </motion.div>
+
+          {/* Right Placeholder: Balances the left panel to keep center content perfectly centered */}
+          <div className="hidden md:block w-[272px] lg:w-[300px] flex-shrink-0 pointer-events-none" aria-hidden="true" />
+        </div>
 
         {/* Asymmetric Bottom Content */}
-        <div className="pt-10 pb-8 w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 relative z-30">
+        <div className="pt-12 md:pt-20 pb-8 w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 relative z-30">
           
           <motion.div 
             initial={{ opacity: 0, x: -30 }}

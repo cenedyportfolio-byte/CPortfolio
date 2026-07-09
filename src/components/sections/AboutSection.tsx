@@ -251,6 +251,7 @@ export function AboutSection() {
                       />
                       <button
                         type="submit"
+                        aria-label="Send message to AI assistant"
                         disabled={isLoading || !input || !input.trim()}
                         className="absolute right-2 p-2 bg-foreground text-background hover:bg-primary hover:text-white disabled:opacity-50 transition-colors cursor-pointer border border-foreground"
                       >

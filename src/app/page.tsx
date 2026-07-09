@@ -10,42 +10,80 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { InteractiveConsole } from "@/components/sections/InteractiveConsole";
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "mainEntity": {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
       "@type": "Person",
+      "@id": "https://cenedypalma.com/#person",
       "name": "Cenedy Udoy Palma",
-      "alternateName": "Cenedy Palma",
-      "jobTitle": "Software Engineer & Product Builder",
+      "givenName": "Cenedy",
+      "familyName": "Palma",
+      "additionalName": "Udoy",
+      "alternateName": ["Cenedy", "Cenedy Palma", "Canady Palma", "Canedy", "Cenady", "Udoy Palma"],
+      "jobTitle": "Senior Backend Developer & AI Engineer",
       "url": "https://cenedypalma.com",
       "image": "https://cenedypalma.com/images/hero.png",
-      "description": "I research problems, plan solutions, design experiences, and build scalable full-stack applications. I own the complete product lifecycle: Research, Planning, UI/UX, Frontend, Backend, Deployment, and Product Growth.",
+      "description": "Senior Backend Developer and AI Product Builder from Bangladesh specializing in Laravel, Node.js, React, and Python.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Dhaka",
         "addressCountry": "Bangladesh"
       },
       "knowsAbout": [
-        "Full Stack Development",
-        "Product Lifecycle",
-        "React",
-        "Next.js",
-        "TypeScript",
+        "Backend Architecture",
+        "AI Engineering",
+        "Software Architecture",
+        "Microservices",
         "Laravel",
-        "PHP",
         "Node.js",
-        "REST APIs",
+        "React",
+        "TypeScript",
+        "Express",
+        "MongoDB",
+        "PostgreSQL",
         "Docker",
-        "System Architecture"
+        "AWS",
+        "Redis",
+        "Python",
+        "Computer Vision",
+        "REST APIs",
+        "Cloud Systems",
+        "Automation"
       ],
       "sameAs": [
         "https://github.com/cenedypalma",
         "https://www.linkedin.com/in/cenedy-palma-9560a7253/",
         "https://x.com/cenedypalma"
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://cenedypalma.com/#website",
+      "url": "https://cenedypalma.com",
+      "name": "Cenedy Udoy Palma Portfolio",
+      "publisher": {
+        "@id": "https://cenedypalma.com/#person"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "@id": "https://cenedypalma.com/#profilepage",
+      "url": "https://cenedypalma.com",
+      "name": "Cenedy Udoy Palma | Backend Developer & AI Engineer",
+      "isPartOf": {
+        "@id": "https://cenedypalma.com/#website"
+      },
+      "about": {
+        "@id": "https://cenedypalma.com/#person"
+      },
+      "mainEntity": {
+        "@id": "https://cenedypalma.com/#person"
+      }
     }
-  };
+  ];
 
   return (
     <div className="min-h-screen bg-background">

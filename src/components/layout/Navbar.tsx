@@ -40,14 +40,15 @@ export function Navbar() {
   }, [mobileMenuOpen, activeCv]);
 
   const navLinks = [
-    { name: "Home", href: "#top" },
-    { name: "About", href: "#about" },
-    { name: "Process", href: "#process" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Skills", href: "#skills" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#top" },
+    { name: "About", href: "/#about" },
+    { name: "Process", href: "/#process" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Experience", href: "/#experience" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Blog", href: "/blog" },
+    { name: "Achievements", href: "/#achievements" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
