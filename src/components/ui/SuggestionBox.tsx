@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquarePlus, X, Send, CheckCircle2 } from "lucide-react";
 
+import { submitSuggestion } from "@/app/actions/suggestionActions";
+
 export function SuggestionBox() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,27 +14,39 @@ export function SuggestionBox() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
 
     setIsSubmitting(true);
 
-    // Mock API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("message", message);
+
+    try {
+      const result = await submitSuggestion(null, formData);
       
-      // Reset after 3 seconds
-      setTimeout(() => {
-        setIsOpen(false);
+      if (result.success) {
+        setIsSuccess(true);
+        // Reset after 3 seconds
         setTimeout(() => {
-          setIsSuccess(false);
-          setName("");
-          setMessage("");
-        }, 300); // Wait for close animation
-      }, 3000);
-    }, 1500);
+          setIsOpen(false);
+          setTimeout(() => {
+            setIsSuccess(false);
+            setName("");
+            setMessage("");
+          }, 300); // Wait for close animation
+        }, 3000);
+      } else {
+        alert(result.error || "Failed to submit suggestion.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
