@@ -45,7 +45,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
               <ExternalLink size={16} /> Live Demo
             </a>
             <a href="#" className="inline-flex items-center gap-2 bg-transparent border border-border text-foreground px-6 py-3 font-bold uppercase tracking-wider text-sm hover:border-foreground transition-colors">
-              <Github size={16} /> Source Code
+              <FaGithub size={16} /> Source Code
             </a>
           </div>
         </header>
